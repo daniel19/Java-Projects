@@ -3,7 +3,9 @@
  */
 public class Level1 {
 
-    public static void main(String[]    args){
+    public static void main(String[] args){
+
+
         System.out.print("Running Intelli J project");
     }
 }
