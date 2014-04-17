@@ -1,9 +1,12 @@
 /**
- * Created by developer on 4/16/14.
+ * Multiplication class to handle brunt of the algorithm work
  */
 public class Multiplication {
 
     public int decimalValue;
-    public long binaryValue;
+    private long binaryValue;
 
+    public Multiplication(int d){
+        decimalValue = d;
+    }
 }

@@ -35,6 +35,7 @@ public class Driver {
                     userChoice = userInput.nextInt();
                     break;
                 default:
+                    //Exit program if wrong input
                     runProgram = false;
                     break;
 
