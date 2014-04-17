@@ -45,7 +45,7 @@ class BasicMatrix implements BasicMatrixInterface
       if (row>getNumRows() || row<1 || column>getNumColumns() || column<1)
          throw new MatrixException("Invalid row or column.");
 
-      matrix[row-1][column-1]=value;
+      matrix[row-1][column-1]=value; //
    }
 
    public double getElement(int row, int column) throws MatrixException
