@@ -1,5 +1,5 @@
-/**
- * Main Driver for handling user inputs and displaying outputs.
+package Main; /**
+ * Main Main.Driver for handling user inputs and displaying outputs.
  */
 
 import java.util.Scanner;
@@ -21,18 +21,20 @@ public class Driver {
 
             System.out.print("Please enter your choice (1|2):");
 
-            int userChoice = Integer.parseInt(userInput.nextLine());
+            int userChoice = userInput.nextInt();
 
             switch (userChoice){
                 case 1:
-                    System.out.println("You chose Multiplication");
+                    System.out.println("You chose Main.Multiplication");
                     System.out.print("Please enter in your decimal number:");
                     userChoice = userInput.nextInt();
+
                     break;
                 case 2:
                     System.out.println("You chose Division");
                     System.out.print("Please enter in your decimal number:");
                     userChoice = userInput.nextInt();
+
                     break;
                 default:
                     //Exit program if wrong input
