@@ -13,7 +13,7 @@ public class Driver {
         //Display potential options for the user
         System.out.println("This program will show step by step multiplication/division of numbers.");
         System.out.println("It will use the algorithms from ECE 4120.");
-
+        System.out.println("");
 
         //User selection
         boolean runProgram = true;
