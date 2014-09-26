@@ -30,7 +30,7 @@ public class BlackJackHand
       hand.add(c1);
       hand.add(c2);
 
-      if(c1.getFaceInt() == 0 || c1.getFaceInt() == 1 || c2.getFaceInt() == 0 || c2.getFaceInt() == 1)
+      if(c1.getFaceInt() == 1 || c2.getFaceInt() == 1)
           soft = true;
       else
           soft = false;
@@ -42,8 +42,7 @@ public class BlackJackHand
    {
       int count = 0;
       //DO THIS write a for-each loop to draw all of the cards in the player's hand
-      for(Card c : hand){
-        card = c;
+      for(Card card : hand){
         card.draw(g, x, y + (count*35));
         count++;
       }
@@ -55,7 +54,7 @@ public class BlackJackHand
       int count = 0;
       //DO THIS write a for-each loop to draw all of the cards in the dealer's hand
 
-        for(Card c : hand){
+        for(Card card : hand){
              //the first card that the dealer gets is the up card
              //unless the current game is complete, the second card is hidden
              if (count == 0) 
@@ -90,23 +89,22 @@ public class BlackJackHand
 
       //DO THIS (use a for-each statement and complete some details below
 
-        for(Card c : hand){
-             Card card = c;
+        for(Card card : hand){
              int faceInt = card.getFaceInt();
              if (faceInt > 10)
              {
                 faceInt = 10;
              }
-             sum[0] = 
+             sum[0] = faceInt; 
 
-             if (faceInt == 1 && ??)  
+             if (faceInt == 1 && !ace)  
              {
-                sum[1] =
-                ace = 
+                sum[1] = faceInt + 10;
+                ace = true;
              }
              else
              {
-                sum[1]; 
+                 sum[1] = faceInt;; 
              }
        }
 
@@ -130,9 +128,10 @@ public class BlackJackHand
       //DO THIS
       int hand1 = total[0];
       int hand2 = total[1];
-      if(hand2 >21)
-          return hand2;
-      else if(hand2 < 21 && hand2 == hand1){
+      if(hand2 >21){
+          soft = false;
+          return hand1;
+      } else if(hand2 < 21 && hand2 == hand1){
           soft = false;
           return hand1;
       }else{
@@ -187,13 +186,11 @@ public class BlackJackHand
       if (canSplit())
       {
          //DO THIS
-        BlackJackHand h1 = new BlackJackHand(card1, new Card()); 
-         
-
-
-
+        BlackJackHand h1 = new BlackJackHand(hand.get(0), card1); 
+        BlackJackHand h2 = new BlackJackHand(hand.get(1), card2); 
+        split = new BlackJackHand{h1, h2};
       }
-
+      
       return split;
    }
 

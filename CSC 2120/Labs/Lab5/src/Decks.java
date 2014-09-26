@@ -42,12 +42,9 @@ public class Decks
          //Note from the Card class that integers from 1 to 52 passed to the Card constructor will create the corresponding Card
          //you will need a counter to insert the Cards into the decks array
          if( i == 0 || i > 52){
-             Card c = new Card();
-             count = 0;
-         }else if( i <= 52){
-             Card c = new Card(count);
+             count =1;
          }
-
+         Card c = new Card(count);
          decks[i] = c;
          count++;
 
@@ -67,12 +64,17 @@ public class Decks
     *  Set count so that all of the cards are available again.
     */
    public void shuffle()
-   {
+  {  
+      //Copy of decks
+      Card[] shuffle_deck = decks.clone();
+
       //use the Permutation class to shuffle the Cards
+       Permutation p = new Permutation(1,SIZE);
        for(int i = 0; i < SIZE; i++){
-         if(i==0; || i > 52)
-           Permutation p = new Permutation(1,STANDARD_DECK_SIZE);
-         decks[i] = decks[p.next()];
+           //DEBUG - PRINT
+           int val = p.next();
+           System.out.println(val);
+           decks[i] = shuffle_decks[val];
        } 
       
       count = SIZE - 1;  //the entire deck is available again

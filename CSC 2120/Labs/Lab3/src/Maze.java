@@ -32,7 +32,6 @@ public class Maze implements Drawable, Runnable
           return true;
       else
           return start;
-         : 
    }
 
    private boolean traverse(int row, int column) 
@@ -69,17 +68,15 @@ public class Maze implements Drawable, Runnable
                
                //IMPORTANT!!
                //you will need to make use of the return value
-                   
-               if(!done)//Left
-                    done = traverse(row,column-1);
+               if(!done)//Down
+                   done = traverse(row+1, column);
                if(!done)//Right
                    done = traverse(row, column+1);
                if(!done)//Up
                    done = traverse(row-1, column);
-               if(!done)//Down
-                   done = traverse(row+1, column);
-
-            }
+               if(!done)
+                  done = traverse(row,column-1); 
+           }
 
             //if we are done, on the way back recursively we must mark the path that we took as the solution path
             //at this point, only those methods that participated in the solution are still on the recursion stack
