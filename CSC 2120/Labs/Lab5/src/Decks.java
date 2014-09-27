@@ -1,4 +1,4 @@
-import javax.smartcardio.Card;
+//import javax.smartcardio.Card;
 
 
 /**
@@ -74,7 +74,7 @@ public class Decks
            //DEBUG - PRINT
            int val = p.next();
            System.out.println(val);
-           decks[i] = shuffle_decks[val];
+           decks[i] = shuffle_deck[val];
        } 
       
       count = SIZE - 1;  //the entire deck is available again
@@ -87,7 +87,7 @@ public class Decks
     */
    public Card deal()
    {
-      Card current = null;
+      Card current;
 
       if (count == -1)
       {

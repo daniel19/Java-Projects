@@ -40,8 +40,8 @@ public class BlackJackPlayer
         }
    }
 
-   /** 
-    *  The player wants to split.  
+   /**
+    *  The player wants to split.
     *  You need to remove the hand that is being split from the ArrayList.
     *  Create two new hands and insert them into the appropriate place in the ArrayList.
     */
@@ -50,13 +50,19 @@ public class BlackJackPlayer
       if (canSplit())
       {
          //DO THIS
-         hands.remove(0);
-         hands.add();
-         hands.add();
+         for( BlackJackHand hand : hands){
+             if(hand.canSplit()) {
+                 hands.remove(hand);
+                 BlackJackHand[] array = hand.split(card1, card2);
+                 hands.add(array[0]);
+                 hands.add(array[1]);
+             }
+
+         }
       }
    }
 
-   /** 
+   /**
     *  The player wants to double down.
     *  Obtain the current hand using the hand_index instance var.
     *  Hit the hand.
@@ -100,7 +106,7 @@ public class BlackJackPlayer
          }
          //only if player did not bust do we check for a dealer bust
          else if (dValue > 21)
-         { 
+         {
             if (hand.isDouble())
             {
                winnings += 1;
@@ -156,7 +162,7 @@ public class BlackJackPlayer
       {
          optimal = 'H';
       }
-    
+
       return optimal;
    }
 

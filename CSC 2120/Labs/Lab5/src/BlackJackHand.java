@@ -104,7 +104,7 @@ public class BlackJackHand
              }
              else
              {
-                 sum[1] = faceInt;; 
+                 sum[1] = faceInt;
              }
        }
 
@@ -188,7 +188,7 @@ public class BlackJackHand
          //DO THIS
         BlackJackHand h1 = new BlackJackHand(hand.get(0), card1); 
         BlackJackHand h2 = new BlackJackHand(hand.get(1), card2); 
-        split = new BlackJackHand{h1, h2};
+        split = new BlackJackHand[]{h1, h2};
       }
       
       return split;
