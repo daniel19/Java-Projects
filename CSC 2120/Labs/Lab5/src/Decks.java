@@ -1,6 +1,3 @@
-//import javax.smartcardio.Card;
-
-
 /**
  *  Represents one or more decks of cards.
  */ 
@@ -69,11 +66,13 @@ public class Decks
       Card[] shuffle_deck = decks.clone();
 
       //use the Permutation class to shuffle the Cards
-       Permutation p = new Permutation(1,SIZE);
+       Permutation p = new Permutation(SIZE,SIZE-1);
        for(int i = 0; i < SIZE; i++){
            //DEBUG - PRINT
            int val = p.next();
-           System.out.println(val);
+           System.out.println("Permutation value: " + val);
+           System.out.println("Deck Size: " + SIZE);
+           System.out.println("Loop Position: " + i);
            decks[i] = shuffle_deck[val];
        } 
       

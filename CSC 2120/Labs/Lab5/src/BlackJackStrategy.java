@@ -38,13 +38,34 @@ public class BlackJackStrategy
       //First determine if player hand is hard or soft
       if(player.isSoft()){
         player_value +=7;
-        optimal = strategy[player_value][col];
+        optimal = getAction(strategy.getElement(player_value, col));
       }else{
-        optimal = strategy[player_value][col];
+        optimal = getAction(strategy.getElement(player_value, col));
       }
 
 
       return optimal;
+   }
+
+    /**
+     * Returns the Char from the selected value in matrix
+     * @param val Value from strategy.getElement()
+     * @return char optimal
+     */
+   public char getAction(double val){
+       switch((int)val){
+           case 1:
+               return 'S';
+           case 2:
+               return 'H';
+           case 3:
+               return 'D';
+           case 4:
+               return 'P';
+           default:
+               return 'S';
+
+       }
    }
 
    /**
@@ -59,12 +80,10 @@ public class BlackJackStrategy
       boolean should_split = false;
       int row = player.handValue();
       int col = up_card;
-      if(player.canSplit() && strategy[row][col] == 'P'){
+      if(player.canSplit() && getAction(strategy.getElement(row, col)) == 'P'){
         //Determine strategy
         should_split = true;
       }
-
-
 
       return should_split;
    }
