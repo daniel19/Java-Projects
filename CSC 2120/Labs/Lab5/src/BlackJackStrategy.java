@@ -26,13 +26,22 @@ public class BlackJackStrategy
    public char getMove(BlackJackHand player, BlackJackHand dealer) 
    {
       int up_card = dealer.upCard();
-
+      int player_value = player.handValue();
       char optimal = 'S';
 
-      int row = 0;
-      int col = 0;
-      int player_value = player.handValue();
+      int col = up_card;
+     
+      if(up_card == 1)//Dealer Ace card hint
+         col = 9;
 
+
+      //First determine if player hand is hard or soft
+      if(player.isSoft()){
+        player_value +=7;
+        optimal = strategy[player_value][col];
+      }else{
+        optimal = strategy[player_value][col];
+      }
 
 
       return optimal;
@@ -48,25 +57,12 @@ public class BlackJackStrategy
       int up_card = dealer.upCard();
 
       boolean should_split = false;
-      int row = 0;
-      int col = 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      int row = player.handValue();
+      int col = up_card;
+      if(player.canSplit() && strategy[row][col] == 'P'){
+        //Determine strategy
+        should_split = true;
+      }
 
 
 
