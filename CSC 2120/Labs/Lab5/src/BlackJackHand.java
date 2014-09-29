@@ -80,6 +80,7 @@ public class BlackJackHand
     * Both totals are returned in an integer array.
     * This is to help the calling method (see the next method) to determine if this BlackJackHand is soft or not.
     */
+   private static int handVal = 0;
    private int[] sum()
    {
       int[] sum = new int[2];
@@ -91,12 +92,10 @@ public class BlackJackHand
 
         for(Card card : hand){
              int faceInt = card.getFaceInt();
-             if (faceInt > 10)
-             {
-                faceInt = 10;
+             if (faceInt > 10) {
+                 faceInt = 10;
+                 sum[0] = faceInt;
              }
-             sum[0] = faceInt; 
-
              if (faceInt == 1 && !ace)  
              {
                 sum[1] = faceInt + 10;
@@ -124,10 +123,12 @@ public class BlackJackHand
    public int handValue()
    {
       int[] total = sum();
-
+      handVal++;
       //DO THIS
       int hand1 = total[0];
       int hand2 = total[1];
+      System.out.println(handVal + " - Hand 1: " + hand1 + " Hand 2: " + hand2);
+      System.out.println();
       if(hand2 >21){
           soft = false;
           return hand1;
