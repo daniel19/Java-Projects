@@ -1,6 +1,3 @@
-//import javax.smartcardio.Card;
-
-
 /**
  *  Represents one or more decks of cards.
  */ 
@@ -41,22 +38,30 @@ public class Decks
          //DO THIS (create the cards, add to the decks)
          //Note from the Card class that integers from 1 to 52 passed to the Card constructor will create the corresponding Card
          //you will need a counter to insert the Cards into the decks array
-         if( i == 0 || i > 52){
-             count =1;
-         }
-         Card c = new Card(count);
-         decks[i] = c;
-         count++;
 
+          for(int j =1; j <=52; j++){
+            decks[(52*count)+j-1] = new Card(j);
+          }
+          count++;
       }
 
       //DO THIS
       //mix them up
       shuffle();
-
+      //printArray(decks);
 
    }
 
+
+    public void printArray(Card[] d){
+        int count = 1;
+        for( Card c : d){
+            if (c != null){
+                System.out.println("Card " + count + " :" + c.toString());
+                count++;
+            }
+        }
+    }
    /**
     *  Shuffles the Cards by selecting a random location for each Card.
     *  Create a new array of Cards.  
@@ -69,11 +74,10 @@ public class Decks
       Card[] shuffle_deck = decks.clone();
 
       //use the Permutation class to shuffle the Cards
-       Permutation p = new Permutation(1,SIZE);
-       for(int i = 0; i < SIZE; i++){
+       Permutation p = new Permutation(SIZE,SIZE-1);
+       for(int i = 0; i < SIZE-1; i++){
            //DEBUG - PRINT
            int val = p.next();
-           System.out.println(val);
            decks[i] = shuffle_deck[val];
        } 
       
