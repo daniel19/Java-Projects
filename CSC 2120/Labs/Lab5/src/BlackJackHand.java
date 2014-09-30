@@ -94,16 +94,17 @@ public class BlackJackHand
              int faceInt = card.getFaceInt();
              if (faceInt > 10) {
                  faceInt = 10;
-                 sum[0] = faceInt;
              }
+
+            sum[0] += faceInt;
              if (faceInt == 1 && !ace)  
              {
-                sum[1] = faceInt + 10;
+                sum[1] += faceInt + 10;
                 ace = true;
              }
              else
              {
-                 sum[1] = faceInt;
+                 sum[1] += faceInt;
              }
        }
 
