@@ -8,4 +8,12 @@ import java.util.LinkedList;
  */
 public abstract class CarItem{
    /** Only one instance variable of type CarItem **/
+   private CarItem item;
+
+   public double cost(){
+        
+   }
+
+   public String toString(){
+   }
 }
