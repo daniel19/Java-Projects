@@ -12,10 +12,11 @@ public class TreeSortDriver
       String userInput = Keyboard.getKeyboard().readString("Please enter filename: ");
       boolean exit = false;
       CD[] results = null;
+      //results = readMusic(userInput);
       while(!exit){
         try{
             results = readMusic(userInput);
-            exit = true; 
+            exit = true;
         }catch (FileIOException e){
             userInput = Keyboard.getKeyboard().readString("Please enter in a valid filename: ");
         }
@@ -23,7 +24,7 @@ public class TreeSortDriver
 
       //once you have the array of CDs back from readMusic, sort them
       //and print them out to make sure that they are  
-      results = (CD[])TreeSort.treeSort(results);
+      results = (CD[])TreeSort.treeSort(results, 10);
       for( CD item : results)
           System.out.println("Result: " + item);
    }
@@ -33,7 +34,7 @@ public class TreeSortDriver
    private static CD[] readMusic(String fileName)
    {
       //DO THIS complete this method using the FileIO class
-      FileIO file = FileIO(fileName); 
+      FileIO file = new FileIO(fileName, FileIO.FOR_READING);
       String str = file.readLine(); 
       ArrayList<CD> cds = new ArrayList<CD>();
 
