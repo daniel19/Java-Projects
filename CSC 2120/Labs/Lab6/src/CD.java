@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import Key.KeyedItem;
+import ki.KeyedItem;
 public class CD extends KeyedItem
 {
    private String title;
@@ -11,8 +11,7 @@ public class CD extends KeyedItem
    public CD (String title, String artist, int year, int rating, int tracks)
    {
       //complete the constructor with respect to extending KeyedItem
-      super(Comparable<Integer> new Integer(year));
-             
+      super(new Integer(year));
 
       this.title = title;
       img = artist + " - " + title + ".jpg";
@@ -78,6 +77,14 @@ public class CD extends KeyedItem
       file.writeLine("</table>");
 
       file.writeLine("         </ul>");
+   }
+
+   public Song getSong(int index){
+        return songs.get(index);
+   }
+
+   public void addSong(String title, String length){
+        songs.add(new Song(title, length));
    }
 }
 
