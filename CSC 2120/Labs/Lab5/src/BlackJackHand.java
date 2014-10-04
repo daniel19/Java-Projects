@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.awt.Graphics;
 
 
-//import javax.smartcardio.Card;
-
 /**
  *  This class represents a black jack hand, which contains two or more Cards.
  */
@@ -128,8 +126,7 @@ public class BlackJackHand
       //DO THIS
       int hand1 = total[0];
       int hand2 = total[1];
-      System.out.println(handVal + " - Hand 1: " + hand1 + " Hand 2: " + hand2);
-      System.out.println();
+
       if(hand2 >21){
           soft = false;
           return hand1;

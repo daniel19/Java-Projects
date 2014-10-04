@@ -72,7 +72,7 @@ public class BlackJackPlayer
    {
       BlackJackHand hand = hands.get(hand_index - 1);
       hand.hit(dealt);
-
+      System.out.println("Double");
       //DO THIS (call a method in BlackJackHand)
       hand.doubleDown();
 

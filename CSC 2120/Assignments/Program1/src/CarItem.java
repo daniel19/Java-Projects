@@ -4,15 +4,16 @@
  *      -CarColor
  *      -CarOption
  */
-public abstract class CarItem implements Car{
+public abstract class CarItem{
    /** Only one instance variable of type CarItem **/
    private CarItem item;
 
-   public double cost(){
-       return item.cost();
+   public CarItem(CarItem item){
+       this.item = item;
    }
+   abstract double cost();
 
    public String toString(){
-        return item.toString()
+        return item.toString();
    }
 }
