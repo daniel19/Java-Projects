@@ -24,7 +24,7 @@ public class TreeSortDriver
 
       //once you have the array of CDs back from readMusic, sort them
       //and print them out to make sure that they are  
-      results = (CD[])TreeSort.treeSort(results, 10);
+      results = (CD[])TreeSort.treeSort(results);
       for( CD item : results)
           System.out.println("Result: " + item);
    }

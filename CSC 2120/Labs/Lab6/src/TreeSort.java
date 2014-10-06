@@ -20,9 +20,10 @@ public class TreeSort{
         btIterator.setInorder();
         int count = 0;
         while(btIterator.hasNext()){
-           if(count <= n)
-            copy_array[count] = (KeyedItem)btIterator.next();
-          else
+           if(count <= n) {
+               copy_array[count] = (KeyedItem) btIterator.next();
+               count++;
+           }else
             copy_array[count] = unsorted[count];    
         }
         return copy_array;
