@@ -1,3 +1,4 @@
+
 /**
  *  Abstract class the is the parent of the following classes:
  *      -CarModel
@@ -6,14 +7,25 @@
  */
 public abstract class CarItem{
    /** Only one instance variable of type CarItem **/
-   private CarItem item;
+   private CarItem next;
 
    public CarItem(CarItem item){
-       this.item = item;
+       next = item;
    }
-   abstract double cost();
+   public double cost()
+   {
+       return next.cost();
+   }
 
    public String toString(){
-        return item.toString();
+       return next.toString();
    }
+
+    public boolean isDuplicate(CarOption check){
+        if(this instanceof CarOption && check == this)
+            return true;
+        else
+            return false;
+    }
+
 }

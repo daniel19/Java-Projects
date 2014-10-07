@@ -4,10 +4,12 @@
  */
 public class Civic extends CarModel{
 
+    public Civic(){
+        super();
+    }
 
-    @Override
-    double cost() {
-        return 19000.79;
+    public double cost() {
+        return super.cost() + 19000.79;
     }
 
     public String toString(){

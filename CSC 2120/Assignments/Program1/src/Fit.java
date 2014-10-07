@@ -4,10 +4,11 @@
  */
 public class Fit extends CarModel{
 
-
-    @Override
-    double cost() {
-        return 17000.02;
+    public Fit(){
+        super();
+    }
+    public double cost() {
+        return super.cost() + 17000.02;
     }
 
     public String toString(){

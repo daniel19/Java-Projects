@@ -6,13 +6,15 @@ abstract class CarColor extends CarItem {
         super(model);
     }
 
-    public CarColor(CarOption option){
-        super(option);
+    public CarColor(CarColor color){
+        super(color);
     }
 
-    @Override
-    double cost() {
-        return 247.67;
-    }
 
+    public double cost() {
+        return super.cost() + 247.67;
+    }
+    public String toString(){
+        return "Color: ";
+    }
 }

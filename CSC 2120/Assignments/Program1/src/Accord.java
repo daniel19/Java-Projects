@@ -3,11 +3,11 @@
  *
  */
 public class Accord extends CarModel{
-
-
-    @Override
-    double cost() {
-        return 23000.99;
+    public Accord(){
+        super();
+    }
+    public double cost() {
+        return super.cost() + 23000.99;
     }
 
     public String toString(){

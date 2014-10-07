@@ -1,4 +1,4 @@
-public class CarOption extends CarItem{
+public abstract class CarOption extends CarItem{
     public CarOption(CarColor color){
         super(color);
     }
@@ -7,8 +7,7 @@ public class CarOption extends CarItem{
         super(opiton);
     }
 
-    @Override
-    double cost() {
-        return 399.33;
-    }
+    public boolean isDuplicate(){return false;};
+    abstract boolean equals(CarOption option);
+
 }
