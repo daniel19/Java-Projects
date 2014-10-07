@@ -7,7 +7,9 @@ public class Spoiler extends CarOption {
         super(opiton);
     }
 
-
+    public double cost(){
+        return super.cost();
+    }
     @Override
     boolean equals(CarOption option) {
         if(option instanceof CarOption && option == this){
@@ -16,5 +18,9 @@ public class Spoiler extends CarOption {
             return false;
         }
 
+    }
+
+    public String toString(){
+        return super.toString() + "Spoiler \r\n";
     }
 }

@@ -7,7 +7,7 @@ public class CarBuilder{
     }
     public boolean buildModel(char modelChar) { //creates the CarModel if the input is okay, else does nothing and returns false
         //check modelChar if it is c then set item to Civic class
-        System.out.println("Building Model: " + modelChar);
+       // System.out.println("Building Model: " + modelChar);
         switch (modelChar){
             case 'F':
                 if(!hasModel()) {
@@ -38,7 +38,7 @@ public class CarBuilder{
 
     }
     public boolean buildColor(char colorChar) { //creates a CarColor and adds it to the order if the input is okay
-        System.out.println("Building Color: :" + colorChar);
+        //System.out.println("Building Color: :" + colorChar);
         if(!hasModel()){
             return false;
         }else {
@@ -69,7 +69,7 @@ public class CarBuilder{
 
     //TODO: Check instance of item to see if we should construct color or item.
     public boolean buildOption(char optionChar) { //creates a CarOption and adds it to the order if the input is okay
-        System.out.println("Building option:" + optionChar);
+        //System.out.println("Building option:" + optionChar);
         if(!hasModel()){
             return false;
         }else {

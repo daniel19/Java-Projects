@@ -3,6 +3,7 @@ import java.lang.System;
 public class Driver{
     static Keyboard k = Keyboard.getKeyboard();
     public static void main (String[] args){
+
         double cost = 0;
         int carCounter = 0;
         CarBuilder cb;
@@ -26,8 +27,9 @@ public class Driver{
                     break;
                 case 2:
                     cb = new HondaFitLoaded();
-                    showOrder(cb.orderCar());
-                    cost = cost + cb.orderCar().cost();
+                    CarItem i = cb.orderCar();
+                    showOrder(i);
+                    //cost = cost + i.cost();
                     carCounter++;
                     userResponse = k.readString("Would you like to order another car (y/n)? ");
                     if(userResponse =="n")
@@ -82,3 +84,4 @@ public class Driver{
     }
 
 }
+

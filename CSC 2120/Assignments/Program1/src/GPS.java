@@ -14,6 +14,9 @@ public class GPS extends CarOption {
         }else{
             return false;
         }
+    }
 
+    public String toString(){
+        return super.toString() + "GPS\r\n";
     }
 }
