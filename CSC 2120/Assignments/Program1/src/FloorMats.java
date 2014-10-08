@@ -9,6 +9,11 @@ public class FloorMats extends CarOption {
     public FloorMats(CarOption opiton) {
         super(opiton);
     }
+
+    public String toString(){
+        return super.toString() + "Floor Mats\r\n";
+    }
+
     @Override
     boolean equals(CarOption option) {
         if(option instanceof CarOption && option == this){

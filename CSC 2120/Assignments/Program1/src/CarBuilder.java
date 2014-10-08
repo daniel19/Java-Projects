@@ -7,7 +7,7 @@ public class CarBuilder{
     }
     public boolean buildModel(char modelChar) { //creates the CarModel if the input is okay, else does nothing and returns false
         //check modelChar if it is c then set item to Civic class
-       // System.out.println("Building Model: " + modelChar);
+        //System.out.println("Building Model: " + modelChar + " / " + hasModel());
         switch (modelChar){
             case 'F':
                 if(!hasModel()) {
@@ -15,30 +15,24 @@ public class CarBuilder{
                     return true;
                 }
                 return false;
-
             case 'A':
                 if(!hasModel()) {
                     item = new Accord();
                     return true;
                 }
                 return false;
-
             case 'C':
                 if(!hasModel()) {
                     item = new Civic();
                     return true;
                 }
                 return false;
-
             default:
                 return false;
-
         }
-
-
     }
     public boolean buildColor(char colorChar) { //creates a CarColor and adds it to the order if the input is okay
-        //System.out.println("Building Color: :" + colorChar);
+        //System.out.println("Building Color: " + colorChar + " / " + hasModel());
         if(!hasModel()){
             return false;
         }else {
@@ -69,7 +63,6 @@ public class CarBuilder{
 
     //TODO: Check instance of item to see if we should construct color or item.
     public boolean buildOption(char optionChar) { //creates a CarOption and adds it to the order if the input is okay
-        //System.out.println("Building option:" + optionChar);
         if(!hasModel()){
             return false;
         }else {
@@ -77,7 +70,7 @@ public class CarBuilder{
                 case 'S':
                     if(item instanceof CarColor){
                         item = new Spoiler((CarColor) item);
-                    }else if(item instanceof CarOption){
+                    }else if(item instanceof CarOption && !isDuplicate()){
                         item = new Spoiler((CarOption) item);
                     }
                     return true;
@@ -131,5 +124,9 @@ public class CarBuilder{
             return true;
         else
             return false;
+    }
+
+    private boolean isDuplicate(){
+        return item.isDuplicate((CarOption)item);
     }
 }

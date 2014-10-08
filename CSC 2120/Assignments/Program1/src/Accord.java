@@ -7,7 +7,7 @@ public class Accord extends CarModel{
         super();
     }
     public double cost() {
-        return super.cost() + 23000.99;
+        return 23000.99;
     }
 
     public String toString(){

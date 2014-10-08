@@ -7,7 +7,9 @@ public abstract class CarOption extends CarItem{
         super(opiton);
     }
 
-    public boolean isDuplicate(){return false;};
+    public boolean isDuplicate(){
+        return super.isDuplicate(this);
+    };
     public double cost(){
         return super.cost() + 399.33;
     }

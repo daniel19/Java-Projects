@@ -8,7 +8,7 @@ public class Fit extends CarModel{
         super();
     }
     public double cost() {
-        return super.cost() + 17000.02;
+        return  17000.02;
     }
 
     public String toString(){

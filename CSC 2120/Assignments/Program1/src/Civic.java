@@ -9,7 +9,7 @@ public class Civic extends CarModel{
     }
 
     public double cost() {
-        return super.cost() + 19000.79;
+        return 19000.79;
     }
 
     public String toString(){

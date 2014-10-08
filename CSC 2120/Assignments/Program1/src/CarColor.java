@@ -15,6 +15,5 @@ abstract class CarColor extends CarItem {
         return super.cost() + 247.67;
     }
     public String toString(){
-        return "Color: ";
-    }
+        return super.toString()+"Color: "; }
 }

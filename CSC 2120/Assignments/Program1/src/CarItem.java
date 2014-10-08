@@ -22,10 +22,12 @@ public abstract class CarItem{
    }
 
     public boolean isDuplicate(CarOption check){
-        if(this instanceof CarOption && check == this)
+        if(next instanceof CarColor)
+            return false;
+        else if(check.equals((CarOption)next))
             return true;
         else
-            return false;
+            return next.isDuplicate(check);
     }
 
 }

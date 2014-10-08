@@ -3,13 +3,13 @@ public class GPS extends CarOption {
         super(color);
     }
 
-    public GPS(CarOption opiton) {
-        super(opiton);
+    public GPS(CarOption option) {
+        super(option);
     }
 
     @Override
     boolean equals(CarOption option) {
-        if(option instanceof CarOption && option == this){
+        if(option instanceof GPS ){
             return true;
         }else{
             return false;
