@@ -65,7 +65,6 @@ public class Driver{
             }else if(ans.charAt(0) == 'D'){
                 done = true;
             }
-            System.out.println("\n\n correctColor:" + correctColor + "  done: " + done + "\n\n");
         }
     }
     private static void requestOptions(CarBuilder cb){
@@ -76,7 +75,7 @@ public class Driver{
         menuList.add("(F)loor Mats, ");
         menuList.add("(G)PS, ");
         menuList.add("(S)poilers, ");
-        menuList.add("(D)one");
+        menuList.add("(D)one :");
         while(!correctOption || !done) {
             String ask = "";
             for(String s : menuList)    

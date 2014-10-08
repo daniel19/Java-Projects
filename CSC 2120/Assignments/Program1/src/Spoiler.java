@@ -12,7 +12,7 @@ public class Spoiler extends CarOption {
     }
     @Override
     boolean equals(CarOption option) {
-        if(option instanceof CarOption && option == this){
+        if(option instanceof Spoiler){
              return true;
         }else{
             return false;

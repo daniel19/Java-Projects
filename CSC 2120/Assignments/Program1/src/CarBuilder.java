@@ -66,7 +66,7 @@ public class CarBuilder{
         if(!hasModel()){
             return false;
         }else {
-            //temporary = null;
+            CarItem prevItem = item;
             switch (optionChar){
                 case 'S':
                     if(item instanceof CarColor){
@@ -74,10 +74,11 @@ public class CarBuilder{
                     }else if(item instanceof CarOption){
                         item = new Spoiler((CarOption) item);
                     }
-                    /*if(isDuplicate((CarOption)item)){
-                        item = null;
-                        return false;
-                    }*/
+                    if(isDuplicate((CarOption)item)){
+                        System.out.println("Duplicate found");
+                        item = prevItem;
+                        //return false;
+                    }
 
                     return true;
                 case 'G':
@@ -86,10 +87,9 @@ public class CarBuilder{
                     }else if(item instanceof CarOption){
                         item = new GPS((CarOption) item);
                     }
-                    /*if(isDuplicate((CarOption)item)){
-                        item = null;
-                        return false;
-                    }*/
+                    if(isDuplicate((CarOption)item)){
+                        item = prevItem;
+                    }
                     return true;
                 case 'A':
                     if(item instanceof CarColor){
@@ -97,10 +97,9 @@ public class CarBuilder{
                     }else if(item instanceof CarOption){
                         item = new AlloyWheels((CarOption) item);
                     }
-                    /*if(isDuplicate((CarOption)item)){
-                        item = null;
-                        return false;
-                    }*/
+                    if(isDuplicate((CarOption)item)){
+                        item = prevItem;
+                    }
                     return true;
                 case 'F':
                     if(item instanceof CarColor){
@@ -108,10 +107,9 @@ public class CarBuilder{
                     }else if(item instanceof CarOption){
                         item = new FloorMats((CarOption) item);
                     }
-                    /*if(isDuplicate((CarOption)item)){
-                        item = null;
-                        return false;
-                    }*/
+                    if(isDuplicate((CarOption)item)){
+                        item = prevItem;
+                    }
                     return true;
                 default:
                     return false;

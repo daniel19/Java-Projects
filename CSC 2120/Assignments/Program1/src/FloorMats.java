@@ -16,7 +16,7 @@ public class FloorMats extends CarOption {
 
     @Override
     boolean equals(CarOption option) {
-        if(option instanceof CarOption && option == this){
+        if(option instanceof FloorMats){
             return true;
         }else{
             return false;
