@@ -66,13 +66,19 @@ public class CarBuilder{
         if(!hasModel()){
             return false;
         }else {
+            //temporary = null;
             switch (optionChar){
                 case 'S':
                     if(item instanceof CarColor){
                         item = new Spoiler((CarColor) item);
-                    }else if(item instanceof CarOption && !isDuplicate()){
+                    }else if(item instanceof CarOption){
                         item = new Spoiler((CarOption) item);
                     }
+                    /*if(isDuplicate((CarOption)item)){
+                        item = null;
+                        return false;
+                    }*/
+
                     return true;
                 case 'G':
                     if(item instanceof CarColor){
@@ -80,6 +86,10 @@ public class CarBuilder{
                     }else if(item instanceof CarOption){
                         item = new GPS((CarOption) item);
                     }
+                    /*if(isDuplicate((CarOption)item)){
+                        item = null;
+                        return false;
+                    }*/
                     return true;
                 case 'A':
                     if(item instanceof CarColor){
@@ -87,6 +97,10 @@ public class CarBuilder{
                     }else if(item instanceof CarOption){
                         item = new AlloyWheels((CarOption) item);
                     }
+                    /*if(isDuplicate((CarOption)item)){
+                        item = null;
+                        return false;
+                    }*/
                     return true;
                 case 'F':
                     if(item instanceof CarColor){
@@ -94,6 +108,10 @@ public class CarBuilder{
                     }else if(item instanceof CarOption){
                         item = new FloorMats((CarOption) item);
                     }
+                    /*if(isDuplicate((CarOption)item)){
+                        item = null;
+                        return false;
+                    }*/
                     return true;
                 default:
                     return false;
@@ -126,7 +144,7 @@ public class CarBuilder{
             return false;
     }
 
-    private boolean isDuplicate(){
-        return item.isDuplicate((CarOption)item);
+    private boolean isDuplicate(CarOption option){
+        return item.isDuplicate(option);
     }
 }
