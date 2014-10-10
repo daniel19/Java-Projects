@@ -8,10 +8,12 @@ public class Driver{
         int carCounter = 0;
         CarBuilder cb;
         boolean run = true;
-        String prompt = "Would you like to order a car (y/n)? ";
+        String prompt = "Would you like to order a car (y/n)?\n";
         while(run){
+            
             String userResponse = k.readString(prompt);
-            if(userResponse.charAt(0) == 'n')
+            char answer = myException(userResponse);
+            if(answer == 'n')
                 break;
 
             int response = menu();
@@ -24,7 +26,8 @@ public class Driver{
                     showOrder(cb.orderCar());
                     carCounter++;
                     cost = cost + cb.orderCar().cost();
-                    prompt = "\nWould you like to order another car (y/n)? ";
+                    prompt = "\nWould you like to order another car (y/n)? \n";
+                    System.out.println("Your car cost is " + Currency.formatCurrency(cb.orderCar().cost()));
                     break;
                 case 2:
                     cb = new HondaFitLoaded();
@@ -32,7 +35,8 @@ public class Driver{
                     showOrder(i);
                     cost = cost + i.cost();
                     carCounter++;
-                    prompt = "\nWould you like to order another car (y/n)? ";
+                    prompt = "\nWould you like to order another car (y/n)?\n";
+                    System.out.println("Your car cost is " + Currency.formatCurrency(i.cost()));
                     break;
                 default:
                     break;
@@ -41,32 +45,48 @@ public class Driver{
         System.out.println("\n\nYou ordered " + carCounter + " car(s) for a grand total of " + Currency.formatCurrency(cost)); 
 
     }
+    /**
+     * Menu returns the user's selected integer.
+     */
     private static int menu(){
         System.out.println("1. Build Your Own");
         System.out.println("2. Honda Fit Loaded\n");
         return k.readInt("Select from the above: ");
     }
+    /**
+     *requestModel uses the car builder to build a CarModel object
+     */
     private static void requestModel(CarBuilder cb){
         boolean correctModel = false;
         while(!correctModel) {
             String ans = k.readString("(A)ccord, (C)ivic, (F)it: ");
-            if (ans.charAt(0) == 'A' || ans.charAt(0) == 'C' || ans.charAt(0) == 'F') {
-                correctModel = cb.buildModel(ans.charAt(0));
+            ans = ans.toUpperCase();
+            char answer = myException(ans);
+            if (answer == 'A' || answer == 'C' || answer == 'F') {
+                correctModel = cb.buildModel(answer);
             }
         }
     }
+    /**
+     *requestColor uses the car builder to build a CarColor object
+     */
     private static void requestColors(CarBuilder cb){
         boolean done = false;
         boolean correctColor = false;
         while(!done || !correctColor) {
             String ans = k.readString("(B)lack, (S)ilver, (W)hite, (D)one: ");
-            if (ans.charAt(0) == 'B' || ans.charAt(0) == 'W' || ans.charAt(0) == 'S') {
-                correctColor = cb.buildColor(ans.charAt(0));
-            }else if(ans.charAt(0) == 'D'){
+            ans = ans.toUpperCase();
+            char answer = myException(ans);
+            if (answer == 'B' || answer == 'W' || answer == 'S') {
+                correctColor = cb.buildColor(answer);
+            }else if(answer == 'D'){
                 done = true;
             }
         }
     }
+    /**
+     *requestOptions uses the car builder to build a CarOption object
+     */
     private static void requestOptions(CarBuilder cb){
         boolean correctOption = false;
         boolean done = false;
@@ -81,9 +101,13 @@ public class Driver{
             for(String s : menuList)    
                  ask = ask + s;
             String ans = k.readString(ask);
-            if (ans.charAt(0) == 'A' || ans.charAt(0) == 'G' || ans.charAt(0) == 'F' || ans.charAt(0) == 'S' ) {
-                correctOption = cb.buildOption(ans.charAt(0));
-                switch(ans.charAt(0)){
+            ans = ans.toUpperCase();
+            char answer = myException(ans);
+            System.out.println("\n\n Answer: " + answer + "\n\n");
+        
+            if (answer == 'A' || answer == 'G' || answer == 'F' || answer == 'S' ) {
+                correctOption = cb.buildOption(answer);
+                switch(answer){
                    case 'A':
                         menuList.remove("(A)lloy Wheels, ");
                         break;
@@ -99,14 +123,31 @@ public class Driver{
                    default:
                         break;
                 }
-            }else if( ans.charAt(0) == 'D'){
+            }else if( answer == 'D'){
                 done = true;
+                correctOption = true;
             }
         }
     }
+    /**
+     *showOrder prints the details of the newly built CarItem using decorator pattern. 
+     */
     private static void showOrder(CarItem item){
         System.out.print(item.toString());
     }
-
+    /**
+     *Function handles the user input to be more readable.
+     */
+    private static char myException(String a){
+        if(a.length() > 1 && !a.equals("DONE") && !a.equals("BLACK") && !a.equals("ACCORD")){
+         return 'x'; 
+       }else{
+          try{
+              return a.charAt(0);
+          }catch(StringIndexOutOfBoundsException e){
+              return 'Z';
+          }
+       }
+    }
 }
 

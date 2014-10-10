@@ -11,19 +11,22 @@ public class CarBuilder{
         switch (modelChar){
             case 'F':
                 if(!hasModel()) {
-                    item = new Fit();
+         //           item = new Fit();
+                    item = new CarModelImproved(17000.02, String.valueOf(modelChar));
                     return true;
                 }
                 return false;
             case 'A':
                 if(!hasModel()) {
-                    item = new Accord();
+                  //  item = new Accord();
+                    item = new CarModelImproved(23000.99, String.valueOf(modelChar));
                     return true;
                 }
                 return false;
             case 'C':
                 if(!hasModel()) {
-                    item = new Civic();
+                   // item = new Civic();
+                    item = new CarModelImproved(19000.79, String.valueOf(modelChar));
                     return true;
                 }
                 return false;
