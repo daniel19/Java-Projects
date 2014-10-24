@@ -79,24 +79,38 @@ public class BinarySearchTree extends BinaryTreeBasis implements SearchTreeInter
       // search for the insertion position
       if (comparison == 0)
       {
-         throw new TreeException ("Cannot add duplicate.");
+        insertDuplicate();
       }
       else if (comparison < 0) 
       {
-         // search the left subtree
-         subtree = insertItem(tNode.getLeft(), item);
-         tNode.setLeft(subtree);
+         tNode = insertLeft(tNode, item);
+        
       }
       else 
       { 
-         // search the right subtree
-         subtree = insertItem(tNode.getRight(), item);
-         tNode.setRight(subtree);
+         tNode = insertRight(tNode, item);
       }  
 
       return tNode;
    }  
+   protected void insertDuplicate() throws TreeException{
+      throw new TreeException ("Cannot add duplicate.");
+   }
 
+   protected TreeNode insertLeft(TreeNode t, KeyedItem item){
+         // search the left subtree
+         TreeNode subtree = insertItem(t.getLeft(), item);
+         //TreeNode subtree = insertItem(t.getRight(), item);
+         t.setLeft(subtree);
+         return t;
+   }
+   protected TreeNode insertRight(TreeNode t, KeyedItem item){
+         // search the right subtree
+         TreeNode subtree = insertItem(t.getRight(), item);
+         //TreeNode subtree = insertItem(t.getLeft(), item);
+         t.setRight(subtree);
+         return t; 
+   }
    protected TreeNode deleteItem(TreeNode tNode, Comparable searchKey) throws TreeException
    {
 

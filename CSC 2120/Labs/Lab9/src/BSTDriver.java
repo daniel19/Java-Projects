@@ -1,22 +1,18 @@
-import java.util.ArrayList; import java.util.Iterator; 
+import java.util.ArrayList;
+import java.util.Iterator; 
 public class BSTDriver
 {
    public static void main(String[] args)
    {
       //call the height and isBalanced methods and display the results with all items inserted
-      System.out.println("Correct Implementation\n");
-      for(int i=0; i <= 10; i++){
-          System.out.print("-");
-          if(i == 10)
-              System.out.println();
-      }
       BinarySearchTree st = new BinarySearchTree();
       CD[] cds = readMusic("cds.txt");
-      for(int i=0; i <= 2; i++){
-          st.insert(cds[i]);
+      System.out.println("Inserting 250 records");
+      for(CD c : cds){
+          st.insert(c);
       }
-      //st.delete(cds[0].getKey());
-      //st.insert(cds[0]);
+      System.out.println("Is tree balanced: " + st.isBalanced());
+      System.out.println("Height of tree: "+ st.height());
    }
 
    private static CD[] readMusic(String fileName)
