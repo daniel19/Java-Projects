@@ -38,12 +38,13 @@ public class Guess
       //count up the white buttons to be awarded
       for(int j = 0; j < current_guess_ids.size(); j++){
          for(int k=0; k < secret_guess_ids.size(); k++){
-           if(current_guess_ids.get(j) == secret_guess_ids.get(k))
+           if(current_guess_ids.get(j) == secret_guess_ids.get(k)){
              white_count++;
              current_guess_ids.remove(j);
              secret_guess_ids.remove(k);
              j--;
              k--;
+            }
          }
       }  
 

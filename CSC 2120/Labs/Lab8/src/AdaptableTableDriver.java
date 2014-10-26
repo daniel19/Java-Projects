@@ -8,7 +8,7 @@ public class AdaptableTableDriver
    {
       TableInterface st = new TableSTBased();  
       CD[] cds = readMusic("cds.txt");
-
+     
       for (int i = 0; i < cds.length; i++)
       {
          try
@@ -17,18 +17,21 @@ public class AdaptableTableDriver
          }
          catch(TableException te)
          {
+             System.out.println(cds[i] + " was not added.\n");
          }
       }
 
       //DO THIS
       //test retrieval of several items and make sure that those items are moved to the root
-
-
-
-
-
+      System.out.println(st.tableSize());
+      for(int j = 0; j < 3; j++){
+        st.tableRetrieve(cds[j].getKey());
+      }
 
       //test removal of a few items (removal should not reorganize the tree)
+      for(int j = 0; j < 3; j++){
+        st.tableDelete(cds[j+3].getKey());
+      }
 
 
    }

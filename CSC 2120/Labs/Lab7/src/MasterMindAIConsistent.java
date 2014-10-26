@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class MasterMindAIConsistent implements MasterMind
+public class MasterMindAIConsistent implements MasterMindAI
 {
    private MasterMind game;
 
@@ -18,17 +18,28 @@ public class MasterMindAIConsistent implements MasterMind
    {
       List<Guess> guesses = game.getGuesses();  //get all previous guesses from the game
       int num_guesses = guesses.size();
-
+      int result = 0;
+      int[] prevArray = null;
       //loop over all previous guesses
       for (int i = 0; i < guesses.size(); i++)
       {
-
-
-
-
+          if(i == 0)
+              prevArray = guesses.get(i).reportResult(nextGuess);
+          if(i > 0){
+            //Compare previous and current
+            int[] pegArray = guesses.get(i).reportResult(nextGuess);
+            if(prevArray[0] == pegArray[0]){
+                if(prevArray[1] == pegArray[1])
+                    result++;
+            }
+            prevArray = pegArray;
+          }
 
       }
-
+      
+      if(!(result == num_guesses))
+        return false;
+        
       return true;
    }
 
@@ -46,13 +57,9 @@ public class MasterMindAIConsistent implements MasterMind
          boolean good = false;
          //keep obtaining a random guess until you get one that works with all previous results
          //it is cheating to keep obtaining a random guess until you match the solution
-
-
-
-
-
-
-
+         for(i = 0; i < num_guesses; i++){
+            
+         }
 
  
          nextGuess = trialGuess;  //found a good one
@@ -71,16 +78,8 @@ public class MasterMindAIConsistent implements MasterMind
    {
       Guess randomGuess = new Guess(guess_id);
       Random random = Random.getRandomNumberGenerator();
-
-
-
-
-
-
-
-
-
-
+      int newID = random.randomInt(1, guess_id);
+      randomGuess = new Guess(newID);
 
       return randomGuess;
    }

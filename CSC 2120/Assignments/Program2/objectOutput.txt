@@ -1,0 +1,52 @@
+{Graduation05/12/08=Party: Graduation
+Host : Joe Smith
+Date: 05/12/08
+Location: Sherlock Park
+Max Guests: 20
+Attending: []
+Not Attending: []
+Unsure: []
+Price $300.00
+Cost $300.00
+Has Paid? false, Wedding02/12/08=Party: Wedding
+Host : Sam Snead
+Date: 02/12/08
+Location: Country Club
+Max Guests: 100
+Attending: []
+Not Attending: []
+Unsure: []
+Price $50.00 per person
+Cost $0.00
+Has Paid? false, April Fools04/01/08=Party: April Fools
+Host : Rose Kennedy
+Date: 04/01/08
+Location: Beach
+Max Guests: 8
+Attending: []
+Not Attending: []
+Unsure: []
+Price $1,999.99
+Cost $1,999.99
+Has Paid? false, Super Bowl02/03/08=Party: Super Bowl
+Host : Ann Jones
+Date: 02/03/08
+Location: 123 Main Street
+Max Guests: 10
+Attending: []
+Not Attending: []
+Unsure: []
+Price $20.00 per person
+Cost $0.00
+Has Paid? false, Fourth of July07/04/08=Party: Fourth of July
+Host : Tina Lucci
+Date: 07/04/08
+Location: 47 Elm Avenue
+Max Guests: 40
+Attending: []
+Not Attending: []
+Unsure: []
+Price $400.00
+Cost $400.00
+Has Paid? false}
+

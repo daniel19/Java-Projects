@@ -1,9 +1,14 @@
+import java.util.*;
 public class TableSTBased implements TableInterface{
     AdaptableBinarySearchTree st; 
-    int size; 
+    int size;
+    public TableSTBased(){
+        st = new AdaptableBinarySearchTree();
+        size=0;
+    } 
     @Override
     public boolean tableIsEmpty(){
-        return st.isEmpty() ? true : false;
+        return (size == 0);
     }
 
     @Override
