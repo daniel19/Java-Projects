@@ -80,9 +80,15 @@ public class PartyPlanner implements Serializable, Statable{
         comps = new Comparator[] {hostComparator, dateComparator, costComparator};
    }
 
+    /**
+     * Adds a party object to the hashmap.
+     * @param theParty
+     */
    private void addToParties(Party theParty){
      parties.put(theParty.getName() + theParty.getDate(), theParty); 
    }
+
+
    public boolean addToParties(String name, String host, String date, String loc, int maxGuests, double price, boolean perParty){
         Party p;
         try{
@@ -93,12 +99,18 @@ public class PartyPlanner implements Serializable, Statable{
        addToParties(p);
        return true;
    }
+
+    /**
+     * Helper method to get items out of the hashmap.
+     * @param name
+     * @param date
+     * @return
+     */
    private Party findParty(String name, String date){
         return parties.get(name + date);
    }
    /**
     * Takes takes the average cost for all the parties in the HashMap.
-    * @param none
     * @return average double of all party costs.
     */ 
    public double getAveageCostPerPerson(){
@@ -142,10 +154,12 @@ public class PartyPlanner implements Serializable, Statable{
     * @param name - name of a party
     * @param date - date of a party
     * @return number of guests not at a party.
-    */  public int getNumNotAttending(String name, String date){
+    */
+    public int getNumNotAttending(String name, String date){
        return  parties.get(name+date).getNumNotAttending();
    }
-   /**
+
+    /**
     *Returns the number of guest attending a party.
     * @param name - name of a party
     * @param date - date of a party
@@ -245,7 +259,7 @@ public class PartyPlanner implements Serializable, Statable{
        out.writeLine(this.toString());
        out.close();
        }catch(Exception e){
-              
+            throw new PartyPlannerException("Unable to write file: " + e.getMessage());
        } 
    }
    /**
