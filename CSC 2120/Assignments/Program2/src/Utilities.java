@@ -1,3 +1,4 @@
+import java.util.Comparator;
 /**
  *  Utility class to provide sorting algorithms and simple date invalidation.
  */
@@ -6,11 +7,11 @@ public class Utilities
 
 
    /**
-    * Sorts the specified array of Comparable objects using the selection
+    * Sorts the specified array of Comparator<T> objects using the selection
     * sort algorithm. <br>
     * The entire array is sorted.<br>  
     */
-   public static void selectionSort(Comparable[] sort)
+   public static <T> void selectionSort(Comparator<T>[] sort)
    {
       if (sort != null)
       {
@@ -19,15 +20,15 @@ public class Utilities
    }
 
    /**
-    * Sorts the specified array of Comparable objects using the selection
+    * Sorts the specified array of Comparator<T> objects using the selection
     * sort algorithm. <br>  
     * The number of items sorted (starting at the beginning of the array) is n.
     */
-   public static void selectionSort (Comparable[] sort, int n)
+   public static <T> void selectionSort (Comparator<T>[] sort, int n)
    {
       //should check n to make sure that it doesn't exceed the array parameters
       int min;
-      Comparable temp;
+      Comparator<T> temp;
 
       if (n > sort.length || n <= 0)
       {
@@ -54,11 +55,11 @@ public class Utilities
 
 
    /**
-    * Sorts the specified array of Comparable objects using the insertion
+    * Sorts the specified array of Comparator<T> objects using the insertion
     * sort algorithm. <br>
     * The entire array is sorted.<br>  
     */
-   public static void insertionSort(Comparable[] sort)
+   public static <T> void insertionSort(Comparator<T>[] sort)
    {
       if (sort != null)
       {
@@ -67,13 +68,13 @@ public class Utilities
    }
 
    /**
-    * Sorts the specified array of Comparable objects using the insertion
+    * Sorts the specified array of Comparator<T> objects using the insertion
     * sort algorithm. <br>  
     * The number of items sorted (starting at the beginning of the array) is n.
     */
-   public static void insertionSort (Comparable[] sort, int n)
+   public static <T> void insertionSort (Comparator<T>[] sort, int n)
    {
-      Comparable temp;
+      Comparator<T> temp;
       int position;
 
       if (n>sort.length || n<=0)
