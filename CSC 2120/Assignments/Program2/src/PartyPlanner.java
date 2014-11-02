@@ -116,7 +116,6 @@ public class PartyPlanner implements Serializable, Statable{
     * @return fileStatus - String
     */
    public String getFileStatus(){return fileStatus;}
-   
     /**
      * Returns the max number of guests from the specified party object.
      * @param name - string title of party

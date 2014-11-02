@@ -1,17 +1,29 @@
 /**
  *  A class to simplify keyboard input.
- *  Builds on the Scanner class provided in the Java SDK.
+ *  Abstracts the Scanner class provided in the Java SDK.
  */
 public class Keyboard
 {
+   private static Keyboard kb = new Keyboard();
+
    /** The SDK provided Scanner object, used to obtain keyboard input */
-   private static java.util.Scanner scan = new java.util.Scanner(System.in);
+   private java.util.Scanner scan;
+
+   private Keyboard()
+   {
+      scan = new java.util.Scanner(System.in);
+   }
+
+   public static Keyboard getKeyboard()
+   {
+      return kb;
+   }
    
    /**
     *  Reads an integer from the keyboard and returns it. <br>
     *  Uses the provided prompt to request an integer from the user.
     */
-   public static int readInt(String prompt)
+   public int readInt(String prompt)
    {
       System.out.print(prompt);
       int num = 0;
@@ -19,16 +31,16 @@ public class Keyboard
       try
       {
          num = scan.nextInt();
-         Keyboard.readString("");  //clear the buffer
+         readString("");  //clear the buffer
       }
       catch (java.util.InputMismatchException ime)  //wrong type inputted
       {
-         Keyboard.readString("");  //clear the buffer
+         readString("");  //clear the buffer
          num = 0;
       }
       catch (java.util.NoSuchElementException nsee)  //break out of program generates an exception
       {
-         Keyboard.readString("");  //clear the buffer
+         readString("");  //clear the buffer
          num = 0;
       }
       return num;
@@ -38,7 +50,7 @@ public class Keyboard
     *  Reads a double from the keyboard and returns it. <br>
     *  Uses the provided prompt to request a double from the user.
     */
-   public static double readDouble(String prompt)
+   public double readDouble(String prompt)
    {
       System.out.print(prompt);
       double num = 0.0;
@@ -46,16 +58,16 @@ public class Keyboard
       try
       {
          num = scan.nextDouble();
-         Keyboard.readString("");  //clear the buffer
+         readString("");  //clear the buffer
       }
       catch (java.util.InputMismatchException ime)
       {
-         Keyboard.readString("");  //clear the buffer
+         readString("");  //clear the buffer
          num = 0;
       }
       catch (java.util.NoSuchElementException nsee)
       {
-         Keyboard.readString("");  //clear the buffer
+         readString("");  //clear the buffer
          num = 0;
       }
 
@@ -66,7 +78,7 @@ public class Keyboard
     *  Reads a line of text from the keyboard and returns it as a String. <br>
     *  Uses the provided prompt to request a line of text from the user.
     */
-   public static String readString(String prompt)
+   public String readString(String prompt)
    {
       System.out.print(prompt);
       String str = "";
@@ -77,11 +89,10 @@ public class Keyboard
       }
       catch (java.util.NoSuchElementException nsee)
       {
-         Keyboard.readString("");  //clear the buffer
+         readString("");  //clear the buffer
          str = "";
       }
 
       return str;
    }
-
 }
