@@ -23,6 +23,7 @@ public class PartyPlanner implements Serializable, Statable{
    public PartyPlanner(){
         parties = new HashMap<String, Party>();
         comps = new Comparator[] {hostComparator, dateComparator, costComparator};
+        plannerName = "Vacancy";
    }
    /**
     * Read appropriate date from a text file. This function is also
@@ -46,7 +47,8 @@ public class PartyPlanner implements Serializable, Statable{
            try{
             ObjectInputStream oInput = new ObjectInputStream(new FileInputStream(filename));
             String firstline = (String)oInput.readObject();
-             try{
+            plannerName = firstline; 
+            try{
                 HashMap<String, Party> partys = (HashMap<String, Party>)oInput.readObject();
                 parties.putAll(partys); 
              }catch(ClassCastException e){
@@ -62,6 +64,7 @@ public class PartyPlanner implements Serializable, Statable{
             //Create a FileIO object to read in text file.
             FileIO input = new FileIO(filename,",");
             String firstLine = input.readLine();
+            plannerName = firstLine;
             while(!input.EOF()){
               //Get each word from line 
               Iterator<String> words = input.getTokens();
@@ -79,7 +82,9 @@ public class PartyPlanner implements Serializable, Statable{
         }
         comps = new Comparator[] {hostComparator, dateComparator, costComparator};
    }
-
+    public void setName(String s){
+        plannerName = s;
+    }
     /**
      * Adds a party object to the hashmap.
      * @param theParty
@@ -244,7 +249,20 @@ public class PartyPlanner implements Serializable, Statable{
         }
         return sb.toString();
    }
-   
+   public String getPaidParties(){
+       StringBuilder sb = new StringBuilder(); 
+       for(Party p : parties.values()){
+          if(p.isPaid()) sb.append(p.toString());
+       }
+    return sb.toString();
+   } 
+   public String getUnpaidParties(){
+       StringBuilder sb = new StringBuilder(); 
+       for(Party p : parties.values()){
+          if(!p.isPaid()) sb.append(p.toString());
+       }
+    return sb.toString();
+   } 
    /**
     *Writes parties to specified text file.
     *@param filename - String
