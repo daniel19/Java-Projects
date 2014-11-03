@@ -19,6 +19,9 @@ public class PartyPlannerDriver {
                         System.out.println("Cannot create a PartyPlanner object: " + e.getMessage());
                         partyPlanner = new PartyPlanner();
                     }
+                }else{
+                    System.out.println("java -cp .:gui.jar:. PartyPlannerDriver [filename] [boolean]");
+                    return;
                 }
                 break;
         }
@@ -91,6 +94,15 @@ public class PartyPlannerDriver {
         }
     }
 
+    public static void doAddParty(PartyPlanner partyPlanner) {
+    }
+    public static void doSort(PartyPlanner p){
+
+    }
+
+    public static void doWrite(PartyPlanner p){
+
+    }
     public static int display(){
         System.out.println("Menu of Kosa Party Planning Services.");
         System.out.println("Enter your choice for the following options:");
@@ -195,6 +207,7 @@ public class PartyPlannerDriver {
    public static void doParyNumbers(PartyPlanner p){
        System.out.println("Processing party numbers.....");
    }
+
 }
 
 
