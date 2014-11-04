@@ -15,7 +15,7 @@ public class Utilities
     * sort algorithm. <br>
     * The entire array is sorted.<br>  
     */
-   public static <T> void selectionSort(Comparator<T>[] sort, Comparator mycomp)
+   public static <T> void selectionSort(T[] sort, Comparator mycomp)
    {
       if (sort != null)
       {
@@ -64,7 +64,7 @@ public class Utilities
     * sort algorithm. <br>
     * The entire array is sorted.<br>  
     */
-   public static <T> void insertionSort(Comparator<T>[] sort, Comparator mycomp)
+   public static <T> void insertionSort(T[] sort, Comparator mycomp)
    {
       if (sort != null)
       {

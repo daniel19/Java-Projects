@@ -1,0 +1,8 @@
+Coco
+Coco's Party,Coco,14/11/03,null,10,5.0,false,false,0,0,0,
+Fourth of July,Tina Lucci,07/04/08,null,40,400.0,true,false,0,0,1,Beth
+April Fools,Rose Kennedy,04/01/08,null,8,1999.99,true,false,0,0,1,Beth
+Wedding,Sam Snead,02/12/08,null,100,50.0,false,false,0,0,1,Beth
+Graduation,Joe Smith,05/12/08,null,20,300.0,true,false,0,0,1,Beth
+Super Bowl,Ann Jones,02/03/08,null,10,20.0,false,false,1,Beth,0,0,
+

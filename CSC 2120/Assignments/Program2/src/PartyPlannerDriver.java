@@ -15,7 +15,10 @@ public class PartyPlannerDriver {
                 if(args.length >=2){
                     try {
                         partyPlanner = new PartyPlanner(args[0], Boolean.parseBoolean(args[1]));
-                    }catch (PartyPlannerException e){
+                    } catch (FileIOException e){
+                        System.out.println("Cannot create a PartyPlanner object: " + e.getMessage());
+                        partyPlanner = new PartyPlanner();
+                    } catch (PartyPlannerException e){
                         System.out.println("Cannot create a PartyPlanner object: " + e.getMessage());
                         partyPlanner = new PartyPlanner();
                     }
@@ -33,6 +36,7 @@ public class PartyPlannerDriver {
         //Display and get Menu value.
         int menuResult = display();
         //performAction
+        System.out.println("\n\n");
         switch(menuResult){
             case 1:
                 doStatus(partyPlanner);
@@ -85,7 +89,7 @@ public class PartyPlannerDriver {
                 break;
 
         }
-
+        System.out.println("\n\n");
         if(continueWork){
             return true;
         }else{
@@ -95,13 +99,68 @@ public class PartyPlannerDriver {
     }
 
     public static void doAddParty(PartyPlanner partyPlanner) {
+        String answer = keyboard.readString("Please enter Y or y to add a party: ");
+        boolean run = true;
+        while(run){
+            if(answer.equalsIgnoreCase("y")){
+                String partyName = keyboard.readString("Please enter in the name of the party that you want to add: ");
+                String partyDate = keyboard.readString("Enter in the date (yy/mm/dd/): ");
+                if(Utilities.isDateInvalid(partyDate)){
+                    System.out.println("Invalid date format; RESTARTING");
+                    break;
+                }
+                String location = keyboard.readString("Enter in the location of party: ");
+                int maximum = keyboard.readInt("Enter in the max number of guests: ");
+                String host = keyboard.readString("Enter in the host of the party: ");
+                double price = keyboard.readDouble("Enter in the price of the party: ");
+                try{
+                    boolean result = partyPlanner.addToParties(partyName, host, partyDate, location, maximum, price, 
+                        Boolean.parseBoolean(keyboard.readString("Is this the price for the whole party: ")));
+                    if(result){
+                        System.out.println("\nParty added successfully.");
+                    }else{
+                        System.out.println("\nNot added");
+                    }
+                }catch(PartyPlannerException e){
+                    System.out.println("\nParty is already being planned. " + e.getMessage());
+                }
+            }else{
+                run = false;
+            }
+            answer = keyboard.readString("Please enter Y or y to add a party.");
+        }
     }
     public static void doSort(PartyPlanner p){
-
+       System.out.println("Processing sort request.......");
+       boolean run = true;
+       int choice = keyboard.readInt("1)host (asc)\n2) party date(desc)\n3) party cost(asc): ");
+       int algorithm = keyboard.readInt("\n1)Selection sort\n2) Insertion sort: ");
+       while(run){
+            if(choice > 0 && choice < 4 && algorithm > 0 && algorithm < 3){
+                String results = p.sort(choice-1, algorithm);
+                System.out.println(results);
+                run = false;
+            }else{
+                if(choice <0 || choice > 4)choice = keyboard.readInt("Enter in the correct sort parameter: ");
+                if(algorithm <0 || algorithm > 3)algorithm = keyboard.readInt("Enter in the correct sorting algorithm: ");
+            }
+       }
     }
 
     public static void doWrite(PartyPlanner p){
-
+        System.out.println("Processing write request....");
+        String filename = keyboard.readString("\nEnter in the desired filename: ");
+        boolean type = Boolean.parseBoolean(keyboard.readString("\nWrite to an object file? (true/false)"));
+        try{
+            if(type){
+               p.writeToObjectFile(filename);
+            }else{
+               p.writeToFile(filename);
+            } 
+        }catch(PartyPlannerException e){
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Write successful");
     }
     public static int display(){
         System.out.println("Menu of Kosa Party Planning Services.");
@@ -131,28 +190,41 @@ public class PartyPlannerDriver {
         }
         String partyName = keyboard.readString("Enter party name: ");
         String partyDate = keyboard.readString("Enter party date: ");
-        if(!p.invite(who, partyName, partyDate))
-            System.out.println(who + " was not invited");
-        else
-            System.out.println(who + " was invited");
+        try {
+            if (!p.invite(who, partyName, partyDate))
+                System.out.println(who + " was not invited");
+            else
+                System.out.println(who + " was invited");
+        }catch(NullPointerException e){
+            System.out.println("Party not found " + e.getMessage());
+        }
     }
 
-    public static void doRegret(PartyPlanner p){
-       System.out.println("Processing decline....");
-       String who = keyboard.readString("Who is not attending? ");
-       String partyName = keyboard.readString("What is the name of the party? ");
-       String partyDate = keyboard.readString("What is the date of the party? ");
-       if(p.takeRegret(who, partyName, partyDate))
-           System.out.println("Regret successful");
-       else
-           System.out.println("RSVP failed.");      
+    public static void doRegret(PartyPlanner p) {
+        System.out.println("Processing decline....");
+        String who = keyboard.readString("Who is not attending? ");
+        String partyName = keyboard.readString("What is the name of the party? ");
+        String partyDate = keyboard.readString("What is the date of the party? ");
+        try {
+            if (p.takeRegret(who, partyName, partyDate))
+                System.out.println("Regret successful");
+            else
+                System.out.println("RSVP failed.");
+        }catch(NullPointerException e){
+            System.out.println("Party not found " + e.getMessage());
+        }
+
     }
     
     public static void doFindGuest(PartyPlanner p){
        System.out.println("Processing who is invited...");
        String partyName = keyboard.readString("What is the name of the party? ");
        String partyDate = keyboard.readString("What is the date of the party? ");
-       System.out.println("\n" + p.getWhosInvited(partyName, partyDate));  
+       try {
+           System.out.println("\n" + p.getWhosInvited(partyName, partyDate));
+       }catch(NullPointerException e){
+           System.out.println("Party not found " + e.getMessage());
+       }
     }
     
     public static void doAccept(PartyPlanner p){
@@ -160,10 +232,14 @@ public class PartyPlannerDriver {
        String who = keyboard.readString("Who is attending? ");
        String partyName = keyboard.readString("What is the name of the party? ");
        String partyDate = keyboard.readString("What is the date of the party? ");
-       if(p.takeAccept(who, partyName, partyDate))
-           System.out.println("Accept successful");
-       else
-           System.out.println("RSVP failed.");      
+       try {
+           if (p.takeAccept(who, partyName, partyDate))
+               System.out.println("Accept successful");
+           else
+               System.out.println("RSVP failed.");
+       }catch(NullPointerException e){
+           System.out.println("Party not found " + e.getMessage());
+       }
     }
 
     public static void doPriceAdj(PartyPlanner p){
@@ -171,10 +247,14 @@ public class PartyPlannerDriver {
       int percent = keyboard.readInt("Please enter the % to adjust the price: ");
       String partyName = keyboard.readString("What is the name of the party? ");
       String partyDate = keyboard.readString("What is the date of the party? ");
-      if(p.updatePrice(partyName, partyDate, percent))
-        System.out.println("The price was adjusted.");
-      else 
-        System.out.println("The price was not adjusted.");
+      try{
+          if(p.updatePrice(partyName, partyDate, percent))
+              System.out.println("The price was adjusted.");
+          else
+              System.out.println("The price was not adjusted.");
+      }catch(NullPointerException e){
+          System.out.println("Party not found " + e.getMessage());
+      }
     }
 
     public static void doPay(PartyPlanner p){
@@ -183,12 +263,20 @@ public class PartyPlannerDriver {
         String partyDate = keyboard.readString("What is the date of the party? "); 
         String choice = keyboard.readString("Pay in full? (Y for yes) ");
         if(choice == "Y"){
-            System.out.println(p.pay(partyName, partyDate));
+            try{
+                System.out.println(p.pay(partyName, partyDate));
+            }catch (NullPointerException e){
+                System.out.println("Party not found " + e.getMessage());
+            }
             return;
         }
 
         int months = keyboard.readInt("# of months: ");
-        System.out.println(p.pay(partyName, partyDate, months));
+        try{
+            System.out.println(p.pay(partyName, partyDate, months));
+        }catch (NullPointerException e){
+            System.out.println("Party not found " + e.getMessage());
+        }
     }
 
    public static void doListUnpaid(PartyPlanner p){
@@ -202,12 +290,46 @@ public class PartyPlannerDriver {
 
    public static void doAvgCost(PartyPlanner p){
        System.out.println("Processing Average Cost....");
-       
+       try{
+           System.out.println("Average cost of open jobs " + p.getAveageCostPerPerson());
+       }catch(NullPointerException e){
+           System.out.println("No average cost found.");
+       }   
    }
    public static void doParyNumbers(PartyPlanner p){
        System.out.println("Processing party numbers.....");
+       int choice = keyboard.readInt("\n1) Max Guests\n2) Attending\n3) Not Attending\n4) Unknown\n");
+       try{
+           boolean run = true;
+           while(run){
+              if(choice > 0 && choice < 5){
+                 String partyName = keyboard.readString("What is the name of the party? ");
+                 String partyDate = keyboard.readString("What is the date of the party? ");
+                 switch(choice){
+                    case 1:
+                        System.out.println(p.getWhosInvited(partyName, partyDate));
+                        break;
+                    case 2:
+                        System.out.println(p.getNumAttending(partyName, partyDate));
+                        break;
+                    case 3:
+                        System.out.println(p.getNumNotAttending(partyName, partyDate));
+                        break;
+                    case 4:
+                        System.out.println(p.getNumUnkown(partyName, partyDate));
+                        break;
+                    default:
+                        choice = keyboard.readInt("Enter in a proper choice. ");
+                        break;
+                 }
+              }else{
+                 choice = keyboard.readInt("Enter in a proper choice. ");
+              } 
+           }
+       }catch(NullPointerException e){
+           System.out.println("Party not found " + e.getMessage());
+       }
    }
 
 }
-
 

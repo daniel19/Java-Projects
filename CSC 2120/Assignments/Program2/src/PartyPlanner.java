@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.*;
 import java.io.Serializable;
 /**
  *PartyPlanner is a class that manages multiple party objects 
@@ -11,9 +8,9 @@ import java.io.Serializable;
  *   @version Oct. 24, 2014
  */
 public class PartyPlanner implements Serializable, Statable{
-   public static HostComparator hostComparator;
-   public static DateComparator dateComparator;
-   public static CostComparator costComparator; 
+   public static HostComparator hostComparator = new HostComparator();
+   public static DateComparator dateComparator = new DateComparator();
+   public static CostComparator costComparator = new CostComparator();
    private Comparator[] comps;
    private String fileStatus;
    private String plannerName;
@@ -42,7 +39,8 @@ public class PartyPlanner implements Serializable, Statable{
     * @return PartyPlanner Object   
     */   
    public PartyPlanner(String filename, boolean isObjectFile) throws PartyPlannerException{
-       Party p; 
+       Party p;
+       parties = new HashMap<String, Party>();
        if(isObjectFile){
            try{
             ObjectInputStream oInput = new ObjectInputStream(new FileInputStream(filename));
@@ -72,12 +70,16 @@ public class PartyPlanner implements Serializable, Statable{
               while(words.hasNext()){
                 //Add returned line to parties hashmap 
                 wordList.add(words.next());
-              } 
+              }
+              if(wordList.size() <= 1){
+                break;
+              }
+
               p = new Party(wordList.get(0), wordList.get(1),
                            wordList.get(2), wordList.get(3),
                            Integer.parseInt(wordList.get(4)), Boolean.parseBoolean(wordList.get(6)),
                            Double.parseDouble(wordList.get(5)));
-             addToParties(p);
+              addToParties(p);
             }
         }
         comps = new Comparator[] {hostComparator, dateComparator, costComparator};
@@ -93,13 +95,30 @@ public class PartyPlanner implements Serializable, Statable{
      parties.put(theParty.getName() + theParty.getDate(), theParty); 
    }
 
-
-   public boolean addToParties(String name, String host, String date, String loc, int maxGuests, double price, boolean perParty){
+    public String sort(int fieldPosition, int algorithm){
+        ArrayList<Party> pList = new ArrayList<Party>(parties.values());
+        Party[] pArray = new Party[0];
+        pArray= pList.toArray(pArray);
+        switch(algorithm){
+            case 2:
+                Utilities.insertionSort(pArray, comps[fieldPosition]);
+            case 1:
+                Utilities.selectionSort(pArray, comps[fieldPosition]);
+            default:
+                break;    
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Party p : pArray){
+            stringBuilder.append(p.toString() + "\n\n");
+        }
+        return stringBuilder.toString();
+    }
+   public boolean addToParties(String name, String host, String date, String loc, int maxGuests, double price, boolean perParty) throws PartyPlannerException{
         Party p;
         try{
             p  = new Party(name, host, date, loc, maxGuests, perParty, price);
         }catch (PartyException e){
-            return false;
+            throw new PartyPlannerException("Duplicate found");
         }
        addToParties(p);
        return true;
@@ -245,7 +264,8 @@ public class PartyPlanner implements Serializable, Statable{
    public String getState(){
         StringBuilder sb = new StringBuilder();
         for(Party p : parties.values()){
-            sb.append(p.getState());
+            //sb.append(p.getState());
+            sb.append(p.toString() + "\n\n");
         }
         return sb.toString();
    }
@@ -271,10 +291,8 @@ public class PartyPlanner implements Serializable, Statable{
    public void writeToFile(String filename) throws PartyPlannerException{
        try{
            FileIO out = new FileIO(filename, FileIO.FOR_WRITING);
-  //     for(Map.Entry<String, Party> entry: parties.entrySet())
-  //          out.writeLine(entry.toString());
-       out.writeLine(this.toString());
-       out.close();
+           out.writeLine(this.toString());
+           out.close();
        }catch(Exception e){
             throw new PartyPlannerException("Unable to write file: " + e.getMessage());
        } 
