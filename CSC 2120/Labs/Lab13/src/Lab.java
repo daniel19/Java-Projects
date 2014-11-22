@@ -1,4 +1,3 @@
-
 public class Lab
 {
    private char grade;

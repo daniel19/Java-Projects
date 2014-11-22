@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 public class Sections
 {
    private ArrayList<Section> sections;
@@ -26,21 +25,31 @@ public class Sections
 
    //DO THIS
    //several short methods must be implemented (note: some have been done, see below)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public int getNumSections(){return sections.size();}
+    public int getNumStudents(int sectionID){
+        return sections.get(sectionID -1).getNumStudents();
+    }
+    public String getStudentName(int sectionID, int studentID){
+        return sections.get(sectionID-1).getStudentName(studentID);
+    }
+    public int getNumLabs(int sectionID){
+        return sections.get(sectionID-1).getNumLabs();
+    }
+    public void setInactive(int sectionID, int studentID){
+        sections.get(sectionID-1).setInactive(studentID);
+    }
+    public void setNotPresent(int sectionID, int studentID, int labID){
+        sections.get(sectionID-1).setNotPresent(studentID, labID);        
+    }
+    public String partnerList(int sectionID, int studentID){
+        return sections.get(sectionID-1).getPartnerList(studentID);
+    }
+    public String studentInfo(int sectionID, int studentID){
+        return sections.get(sectionID-1).getInfo(studentID);
+    }
+    public void addLab(int sectionID){
+       sections.get(sectionID-1).addLab();
+    }
 
  
    //no work below this point

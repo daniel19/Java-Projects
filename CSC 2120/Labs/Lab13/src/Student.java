@@ -1,10 +1,5 @@
-public class Student
-{
-   private int studentID;
-   private String name;
-   private int rank;
-
-   private Labs labs;
+public class Student { 
+    private int studentID; private String name; private int rank; private Labs labs;
 
    //relevant to the current lab only
    private boolean active;
@@ -34,12 +29,20 @@ public class Student
    public int getNumLabs(){
         return labs.getNumLabs(); 
    }
+   public boolean isActive(){return active;}
+   public boolean hasPartner(){return hasPartner;}
    public boolean isPresent(int labID){
        return labs.isPresent(labID);
    }
    
    public int getPartnerID(int labID){
        return labs.getPartnerID(labID);
+   }
+   public void setInactive(){
+       active = false;
+   }
+   public void setGrade(int labID, char grade){
+       labs.setGrade(labID, grade);    
    }
    //no work required below this point
 

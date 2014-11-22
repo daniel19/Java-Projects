@@ -33,13 +33,17 @@ public class Students
    //DO THIS
    //several short methods must be implemented (note: some have been done, see below)
 
-
+  public int getNumLabs(){return determineCurrentLabNumber();}
   public int getNumStudents(){return students.size();}
   public char getGrade(int studentID, int labID){
+    return students.get(studentID -1).getGrade(labID);
   }
-
-
-
+  public void setInactive(int studentID){
+        students.get(studentID-1).setInactive();  
+  }
+  public void setNotPresent(int studentID, int labID){
+      students.get(studentID-1).setGrade(labID, 'F');
+  }
 
 
 
