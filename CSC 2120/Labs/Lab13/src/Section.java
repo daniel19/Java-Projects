@@ -32,7 +32,6 @@ public class Section
     }
 
 
-    public
 
    //no work below this point
    public void computePartners(Random rand)

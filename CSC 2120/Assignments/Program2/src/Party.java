@@ -29,7 +29,9 @@ public class Party implements Serializable, Statable
     public static final int MAX_MONTHS = 12;
     private static final DecimalFormat FMT = new DecimalFormat("$#,##0.00");
     private static int comparisonField = 1;
-    
+    /**
+     *Constructor for Party Object
+     */    
     public Party(String theName, String who, String theDate, String place, int maxToInvite,
                  boolean perParty, double thePrice) throws PartyException
     {
@@ -37,7 +39,7 @@ public class Party implements Serializable, Statable
         {
             throw new PartyException("Null/empty string passed in");
         }
-        if (Utilities.isDateInvalid(theDate))
+        if (Utilities.invalidDate(theDate))
         {
             throw new PartyException("Invalid date passed in");
         }
@@ -76,62 +78,86 @@ public class Party implements Serializable, Statable
             price = thePrice;
         }
     }
-    
+    /**
+    *Sets the paid for boolean attribute. 
+    */
+
     public void setPaid(boolean paid)
     {
         isPaidFor = paid;
     }
     
+    /**
+     *Name setter
+     */
     public String getName()
     {
         return name;
     }
-    
+    /**
+     * host getter
+     */
     public String getHost()
     {
         return host;
     }
-    
+    /**
+     * Date getter
+     */ 
     public String getDate()
     {
         return date;
     }
-    
+    /**
+     * Location getter
+     */ 
     public String getLocation()
     {
         return location;
     }
-    
+    /**
+     *Guest getter
+     */
     public int getMaxGuests()
     {
         return maxGuests;
     }
-    
+    /**
+     *List of who is invited getter.
+     */
     public String getWhosInvited()
     {
         return whosInvited.toString();
     }
-    
+    /**
+     * List of who is attending getter.
+     */
     public String getWhosAttending()
     {
         return whosAttending.toString();
     }
-    
+    /**
+     * Number of attending getter.
+     */
     public int getNumAttending()
     {
         return whosAttending.size();
     }
-    
+    /**
+     *List of who is not attending getter
+     */
     public String getWhosNotAttending()
     {
         return whosNotAttending.toString();
     }
-    
+    /**
+     * Number of who is not attending.
+     */ 
     public int getNumNotAttending()
     {
         return whosNotAttending.size();
     }
-    
+    /**List of unknown RSVPS**/ 
     public ArrayList<String> getWhosUnknown()
     {
         ArrayList<String> result = new ArrayList<String>();
@@ -144,17 +170,17 @@ public class Party implements Serializable, Statable
         }
         return result;
     }
-    
+   /**Number of unknown RSVPs**/ 
     public int getNumUnknown()
     {
         return getWhosUnknown().size();
     }
-    
+    /** Number of who is invited getter. **/ 
     public int getNumInvited()
     {
         return whosInvited.size();
     }
-    
+    /** String representation of paty object. **/ 
     public String toString()
     {
         return "Party: " + name + "\nHost : " + host + "\nDate: " + date +
@@ -163,12 +189,12 @@ public class Party implements Serializable, Statable
         FMT.format(price) + (isPerParty ? "" : " per person") + "\nCost " +
         FMT.format(getCost()) + "\nHas Paid? " + isPaidFor;
     }
-    
+   /**Overloaded method to pay for one month.**/ 
     public String pay()
     {
         return pay(1);
     }
-    
+    /**Cost getter **/ 
     public double getCost()
     {
         double result;
@@ -182,7 +208,7 @@ public class Party implements Serializable, Statable
         }
         return result;
     }
-    
+    /** Pay for the party installments based on the number of months. **/ 
     public String pay(int numMonths)
     {
         String result;
@@ -206,7 +232,7 @@ public class Party implements Serializable, Statable
         }
         return result;
     }
-    
+    /** Invite someone to the party.**/ 
     public boolean invite(String who)
     {
         boolean result = false;
@@ -215,12 +241,13 @@ public class Party implements Serializable, Statable
             if (!whosInvited.contains(who) && numInvited < maxGuests)
             {
                 whosInvited.add(who);
+                numInvited++; // added by MJK on 11/4/2014
                 result = true;
             }
         }
         return result;
     }
-    
+    /**Accept RSVP **/ 
     public boolean takeAccept(String who)
     {
         boolean result = false;
@@ -244,7 +271,7 @@ public class Party implements Serializable, Statable
         }
         return result;        
     }
-    
+   /**Accept denied RSVP*/ 
     public boolean takeRegret(String who)
     {
         boolean result = false;
@@ -260,18 +287,19 @@ public class Party implements Serializable, Statable
                     if (whoAttend != -1) // moving someone out of the attend list
                     {
                         whosAttending.remove(whoAttend);
+                        numInvited--; // added by MJK on 11/4/2014
                     } 
                 }                   
             }
         }
         return result;
     }
-    
+    /**Getter method if Party is paid for.**/ 
     public boolean isPaid()
     {
         return isPaidFor;
     }
-    
+    /** Change the price of the Party. **/ 
     public boolean updatePrice(int percentage)
     {
         boolean result = false;
@@ -285,7 +313,7 @@ public class Party implements Serializable, Statable
         }
         return result;
     }
-    
+    /** String representation to be written to file.**/ 
     public String toFileString()
     {
         String attending = whosAttending.toString();
@@ -317,12 +345,12 @@ public class Party implements Serializable, Statable
         }
         return result.toString();
     }
-    
+    /** Returns toFileString **/ 
     public String getState()
     {
         return toFileString();
     }
-    
+    /** Gets key for hashmap **/ 
     public String getKey()
     {
         return name + date;

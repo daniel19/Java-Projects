@@ -4,6 +4,7 @@
  * @version 11/2/2014
  */
 public class PartyPlannerDriver {
+    /** Variable to handle user input.**/
     private static Keyboard keyboard = Keyboard.getKeyboard();
     public static void main(String[] args){
         PartyPlanner partyPlanner;
@@ -30,7 +31,7 @@ public class PartyPlannerDriver {
         }
         while(doWork(partyPlanner));
     }
-
+    /** Takes user input and redirects the appropriate work**/
     public static boolean doWork(PartyPlanner partyPlanner){
         boolean continueWork = true;
         //Display and get Menu value.
@@ -115,11 +116,13 @@ public class PartyPlannerDriver {
                 double price = keyboard.readDouble("Enter in the price of the party: ");
                 try{
                     boolean result = partyPlanner.addToParties(partyName, host, partyDate, location, maximum, price, 
-                        Boolean.parseBoolean(keyboard.readString("Is this the price for the whole party: ")));
+                        Boolean.parseBoolean(keyboard.readString("Is this the price for the whole party: (true/false)")));
                     if(result){
                         System.out.println("\nParty added successfully.");
+                        run = false;
                     }else{
                         System.out.println("\nNot added");
+                        run = false;
                     }
                 }catch(PartyPlannerException e){
                     System.out.println("\nParty is already being planned. " + e.getMessage());

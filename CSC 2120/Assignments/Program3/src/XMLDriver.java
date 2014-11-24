@@ -10,6 +10,7 @@ public class XMLDriver {
 			controller.readFile();
 			result = keyboard.readString("Enter in the output filename: ");
 			controller.writeFile(result);
+            result = keyboard.readString("Please enter in the xml file you wish to use: ");
 		}
 	}
 }

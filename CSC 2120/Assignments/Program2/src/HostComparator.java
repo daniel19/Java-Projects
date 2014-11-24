@@ -1,6 +1,9 @@
 import java.util.Comparator;
 import java.util.Locale;
 import java.text.Collator;
+/**
+ * HostComparator implements Comparator to compare the two Party objects. 
+ */
 public class HostComparator implements Comparator<Party>{
     private static final Collator collator = Collator.getInstance(Locale.US);
     public int compare(Party s1, Party s2){

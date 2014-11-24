@@ -19,13 +19,14 @@ public class BetweenState implements XMLState {
 	}
 
 	public boolean detectLeftAngle(char character) {
-		if (character == '<' && sb.length() >= 1) {
+        if (character == '<' && sb.length() > 1) {
 			controller.addElement(controller.addWhitespace(controller.xml
 					.stackSize()) + sb.toString());
 			sb = sb.delete(0, sb.length());
 			controller.setNextState(controller.getEndBetweenState());
 			return true;
-		} else if (character == '<' && sb.length() < 1) {
+		} else if (character == '<') {
+			sb = sb.delete(0, sb.length());
 			controller.setNextState(controller.getDetectState());
 			return true;
 		}
@@ -37,7 +38,9 @@ public class BetweenState implements XMLState {
 	}
 
 	public boolean detectCharacters(char character) {
-		sb.append(character);
+		if(character != ' ' && character !='>'){
+            sb.append(character);
+        }
 		return false;
 	}
 }

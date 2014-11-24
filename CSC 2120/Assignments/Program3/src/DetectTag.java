@@ -9,6 +9,7 @@ public class DetectTag implements XMLState {
 
 	public boolean detectForwardSlash(char character) {
 		if (character == '/') {
+            System.out.println("Going to ProcessClose");
 			controller.setNextState(controller.getCloseState());
 			return true;
 		}
@@ -24,11 +25,11 @@ public class DetectTag implements XMLState {
 	}
 
 	public boolean detectCharacters(char character) {
-		if (!detectLeftAngle(character) || !detectRightAngle(character)
-				|| !detectForwardSlash(character)) {
-			controller.setNextState(controller.getOpenState());
-			return true;
-		}
-		return false;
+			if(!detectForwardSlash(character)){
+                controller.setNextState(controller.getOpenState());
+                return true;
+            }
+			return false;
+
 	}
 }

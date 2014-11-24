@@ -25,12 +25,12 @@ public class ProcessOpen implements XMLState {
 	}
 
 	public boolean detectRightAngle(char character) {
-		if (character == '>') {
+        if (character == '>') {
 			controller.pushTagOntoStack(sb.toString());
 			controller.addElement(controller.addWhitespace(controller.xml
 					.stackSize()) + sb.toString());
 			sb.delete(0, sb.length()); // make room for new open xml tag
-			controller.incrementTags("open");
+//			controller.incrementTags("open");
 			controller.setNextState(controller.getBetweenState());
 			return true;
 		}
@@ -38,7 +38,7 @@ public class ProcessOpen implements XMLState {
 	}
 
 	public boolean detectCharacters(char character) {
-		sb.append(character);
+        sb.append(character);
 		return false;
 	}
 }

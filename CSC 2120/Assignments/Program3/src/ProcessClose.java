@@ -11,10 +11,6 @@ public class ProcessClose implements XMLState {
 	}
 
 	public boolean detectForwardSlash(char character) {
-		if (character == '/') {
-			controller.setNextState(controller.getDetectState());
-			return true;
-		}
 		return false;
 	}
 
@@ -26,10 +22,10 @@ public class ProcessClose implements XMLState {
 		if (character == '>') {
 			int stackSize = controller.xml.stackSize();
 			String poppedTag = controller.popTagOffStack();
-			if (poppedTag != sb.toString()) {
+			if (!poppedTag.equals(sb.toString())) {
 				// Throw XMLParseException
 				throw new XMLParseException("\n\nOpen tag: " + poppedTag
-						+ " does not match closing tag: " + sb.toString());
+						+ "does not match closing tag: " + sb.toString() +".");
 			}
 			controller.addElement(controller.addWhitespace(stackSize)
 					+ sb.toString());
@@ -41,7 +37,8 @@ public class ProcessClose implements XMLState {
 	}
 
 	public boolean detectCharacters(char character) {
-		sb.append(character);
+        if(character != '/' && character != '>')
+            sb.append(character);
 		return false;
 	}
 }

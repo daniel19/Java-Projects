@@ -257,7 +257,7 @@ public class PartyPlanner implements Serializable, Statable{
    }
    public boolean updatePrice(String name, String date, int percent){
         return findParty(name, date).updatePrice(percent);
-   }
+   } 
    public void setPaymentStatus(String name, String date, boolean isPaid){
         findParty(name, date).setPaid(isPaid);
    }

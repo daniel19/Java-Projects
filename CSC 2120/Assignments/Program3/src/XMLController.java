@@ -61,19 +61,10 @@ public class XMLController {
 
 	public void pushTagOntoStack(String tag) {
 		xml.addToStack(tag);
-		//printStack();
 	}
 
 	public String popTagOffStack() {
 		return xml.removeFromList();
-	}
-
-	public void incrementTags(String selector) {
-		if (selector == "open") {
-			xml.incrementOpenCount();
-		} else if (selector == "close") {
-			xml.incrementClosedCount();
-		}
 	}
 
 	public String addWhitespace(int number) {
@@ -85,7 +76,7 @@ public class XMLController {
 	}
 
 	public void addElement(String element) {
-		xml.addElementtoList(element);
+		xml.addElementToList(element);
 	}
 
 	public String getElement(int position) {
@@ -98,16 +89,25 @@ public class XMLController {
 	public void readFile() {
 		while (!fileOperator.EOF()) {
 			String line = fileOperator.readLine();
-			for (int i = 0, n = line.length(); i < n; i++) {
-				char lineCharacter = line.charAt(i);
-				if (current.detectLeftAngle(lineCharacter)) {
-					// break from loop iteration
-				} else if (current.detectForwardSlash(lineCharacter)) {
-					// break from loop iteration
-				} else if (current.detectRightAngle(lineCharacter)) {
-					// break from loop iteration
-				} else if (current.detectCharacters(lineCharacter)) {
-					// break from loop iteration
+		    int n;
+            try{
+                n = line.length();
+            }catch(NullPointerException ex){
+                n = 0;
+            }    
+            for (int i = 0; i < n; i++) {
+		        char lineCharacter = line.charAt(i);
+                if (current.detectLeftAngle(lineCharacter)) {
+
+				}
+                if (current.detectForwardSlash(lineCharacter)) {
+                    continue;
+				}
+                if (current.detectRightAngle(lineCharacter)) {
+
+                }
+                if (current.detectCharacters(lineCharacter)) {
+
 				}
 			}
 		}
