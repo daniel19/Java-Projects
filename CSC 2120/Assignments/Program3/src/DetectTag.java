@@ -3,30 +3,23 @@ public class DetectTag implements XMLState {
 	private XMLController controller;
 
 	/** Public Constructor **/
-	public DetectTag(XMLController controller) {
-		this.controller = controller;
-	}
+	public DetectTag(XMLController controller) { this.controller = controller; }
 
 	public boolean detectForwardSlash(char character) {
 		if (character == '/') {
-            System.out.println("Going to ProcessClose");
 			controller.setNextState(controller.getCloseState());
 			return true;
 		}
 		return false;
 	}
 
-	public boolean detectLeftAngle(char character) {
-		return false;
-	}
+	public boolean detectLeftAngle(char character) { return false; }
 
-	public boolean detectRightAngle(char character) {
-		return false;
-	}
+	public boolean detectRightAngle(char character) { return false; }
 
 	public boolean detectCharacters(char character) {
 			if(!detectForwardSlash(character)){
-                controller.setNextState(controller.getOpenState());
+                controller.setNextState(controller.getOpenState(character));
                 return true;
             }
 			return false;

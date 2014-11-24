@@ -38,9 +38,12 @@ public class BetweenState implements XMLState {
 	}
 
 	public boolean detectCharacters(char character) {
-		if(character != ' ' && character !='>'){
-            sb.append(character);
+        if(!detectLeftAngle(character) && !detectRightAngle(character) && !detectForwardSlash(character)){
+            if(character != ' ' && character !='>'){
+                sb.append(character);
+            }    
         }
+        
 		return false;
 	}
 }

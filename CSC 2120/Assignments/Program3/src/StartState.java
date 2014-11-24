@@ -15,7 +15,7 @@ public class StartState implements XMLState {
 	}
 
 	public boolean detectLeftAngle(char character) {
-		if (character == '<') {
+        if (character == '<') {
 			controller.setNextState(controller.getDetectState());
 			return true;
 		}
@@ -27,6 +27,7 @@ public class StartState implements XMLState {
 	}
 
 	public boolean detectCharacters(char character) {
-		return false;
+		detectLeftAngle(character);
+        return false;
 	}
 }

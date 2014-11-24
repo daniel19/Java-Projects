@@ -27,6 +27,9 @@ public class EndBetweenState implements XMLState {
 	}
 
 	public boolean detectCharacters(char character) {
-		return false;
+        if(!detectLeftAngle(character) && !detectRightAngle(character)){
+            detectForwardSlash(character);
+        }
+        return false;
 	}
 }

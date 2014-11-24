@@ -35,8 +35,9 @@ public class XMLController {
 		current = state;
 	}
 
-	public ProcessOpen getOpenState() {
-		return open;
+	public ProcessOpen getOpenState(char character) {
+		open.appendFirstChar(character);
+        return open;
 	}
 
 	public ProcessClose getCloseState() {
@@ -97,19 +98,8 @@ public class XMLController {
             }    
             for (int i = 0; i < n; i++) {
 		        char lineCharacter = line.charAt(i);
-                if (current.detectLeftAngle(lineCharacter)) {
-
-				}
-                if (current.detectForwardSlash(lineCharacter)) {
-                    continue;
-				}
-                if (current.detectRightAngle(lineCharacter)) {
-
-                }
-                if (current.detectCharacters(lineCharacter)) {
-
-				}
-			}
+			    current.detectCharacters(lineCharacter);
+            }
 		}
 	}
 
