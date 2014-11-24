@@ -18,7 +18,7 @@ public class XMLController {
 	private FileIO fileOperator;
 
 	/** Public Constructor **/
-	public XMLController(String filename) {
+	public XMLController(String filename) throws XMLParseException{
 		close = new ProcessClose(this);
 		open = new ProcessOpen(this);
 		detection = new DetectTag(this);
@@ -27,8 +27,12 @@ public class XMLController {
 		between = new BetweenState(this);
 		current = starting;
 		xml = new XML(true);
-		fileOperator = new FileIO(filename, FileIO.FOR_READING);
-	}
+        try{
+            fileOperator = new FileIO(filename, FileIO.FOR_READING);
+        }catch(FileIOException e){
+            throw new XMLParseException(e.getMessage());
+        }
+    }
 
 	// State methods
 	public void setNextState(XMLState state) {

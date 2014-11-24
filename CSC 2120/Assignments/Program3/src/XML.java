@@ -20,9 +20,10 @@ public class XML {
 		return tagStack.size();
 	}
 
-	public String removeFromList() {
-        //System.out.println("\n Popping\r\n" + stackString() + "\n");
-		return tagStack.pop();
+	public String removeFromList() throws XMLParseException {
+		if(tagStack.empty())
+            throw new XMLParseException("The number of open and closed tags do not match.");
+        return tagStack.pop();
 	}
 
 	public void addElementToList(String element) {
