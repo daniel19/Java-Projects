@@ -26,7 +26,7 @@ public class XMLController {
 		endBetween = new EndBetweenState(this);
 		between = new BetweenState(this);
 		current = starting;
-		xml = new XML(true);
+		xml = new XML();
         try{
             fileOperator = new FileIO(filename, FileIO.FOR_READING);
         }catch(FileIOException e){
@@ -34,44 +34,50 @@ public class XMLController {
         }
     }
 
-	// State methods
-	public void setNextState(XMLState state) {
+	/**Sets the current state to one of the six state classes **/
+    public void setNextState(XMLState state) {
 		current = state;
 	}
-
+    /**Sends first char to Open state and returns reference to the Open state.**/
 	public ProcessOpen getOpenState(char character) {
 		open.appendFirstChar(character);
         return open;
 	}
-
+    /** Returns the state references. **/
 	public ProcessClose getCloseState() {
 		return close;
 	}
 
+    /** Returns the state references. **/
 	public DetectTag getDetectState() {
 		return detection;
 	}
 
+    /** Returns the state references. **/
 	public StartState getStartState() {
 		return starting;
 	}
 
+    /** Returns the state references. **/
 	public BetweenState getBetweenState() {
 		return between;
 	}
 
+    /** Returns the state references. **/
 	public EndBetweenState getEndBetweenState() {
 		return endBetween;
 	}
-
+    /** Pushes tag onto stack**/
 	public void pushTagOntoStack(String tag) {
 		xml.addToStack(tag);
 	}
-
+    /**Returns top of stack and then removes it.**/
 	public String popTagOffStack() {
 		return xml.removeFromList();
 	}
-
+    /** Adds the number of white spaces bassed on the number variable.
+     * Used to add indents in the final output file.
+     */
 	public String addWhitespace(int number) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < number; i++) {
@@ -91,7 +97,9 @@ public class XMLController {
 	private void printStack(){
 		System.out.println(xml.stackString());
 	}
-	public void readFile() {
+	
+    /**Reads the users input file and passes each character from each line to the current state.**/
+    public void readFile() {
 		while (!fileOperator.EOF()) {
 			String line = fileOperator.readLine();
 		    int n;
@@ -106,7 +114,7 @@ public class XMLController {
             }
 		}
 	}
-
+    /**Write the final element list to the specified output file.*/
 	public void writeFile(String filename) {
 		fileOperator = new FileIO(filename, FileIO.FOR_WRITING);
 		ArrayList<String> list = xml.getList();

@@ -5,7 +5,7 @@
 public class BetweenState implements XMLState {
 	/** Two way has-a relationship with XML **/
 	private XMLController controller;
-
+    /** Stringbuilder collects all the appropriate incoming chars **/
 	private StringBuilder sb;
 
 	/** Public Constructor **/

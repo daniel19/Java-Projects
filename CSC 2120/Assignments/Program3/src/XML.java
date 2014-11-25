@@ -2,30 +2,31 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class XML {
-	boolean ready;
-	private Stack<String> tagStack;
+	/**Dynamic stack of strings to compare tags.**/
+    private Stack<String> tagStack;
+	/**List that is printed an output file**/
 	private ArrayList<String> elementList;
 
-	public XML(boolean ready) {
-		this.ready = ready;
+    /**Public Constructor**/
+	public XML() {
 		tagStack = new Stack<String>();
 		elementList = new ArrayList<String>();
 	}
-
+    /**Adds open/closed tags to the stack**/
 	public void addToStack(String tag) {
         tagStack.add(tag);
     }
-
+    /** Returns the current Stack size **/
 	public int stackSize() {
 		return tagStack.size();
 	}
-
+    /**Returns tag on top of stack.**/
 	public String removeFromList() throws XMLParseException {
 		if(tagStack.empty())
             throw new XMLParseException("The number of open and closed tags do not match.");
         return tagStack.pop();
 	}
-
+    /**Add values to the list **/
 	public void addElementToList(String element) {
 		elementList.add(element);
 	}
@@ -34,11 +35,13 @@ public class XML {
 		return elementList.get(position);
 	}
 
-	public ArrayList<String> getList() {
+	/**Returns the complete list**/
+    public ArrayList<String> getList() {
 		return elementList;
 	}
 	
-	public String stackString(){
+	/**Used to print the state of the stack.**/
+    public String stackString(){
 		StringBuilder sb = new StringBuilder();
 		for(String s : tagStack){
 			sb.append(s + "\n");

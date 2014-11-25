@@ -22,7 +22,7 @@ public class ProcessClose implements XMLState {
 		if (character == '>') {
 			int stackSize = controller.xml.stackSize();
 			String poppedTag = controller.popTagOffStack();
-			if (!poppedTag.equals(sb.toString())) {
+			if (!poppedTag.equals(sb.toString())) {//Compare value of Opening and closing tags
 				// Throw XMLParseException
 				throw new XMLParseException("\n\nOpen tag: " + poppedTag
 						+ "does not match closing tag: " + sb.toString() +".");

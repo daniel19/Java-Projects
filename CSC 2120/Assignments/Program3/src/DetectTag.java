@@ -18,7 +18,7 @@ public class DetectTag implements XMLState {
 	public boolean detectRightAngle(char character) { return false; }
 
 	public boolean detectCharacters(char character) {
-			if(!detectForwardSlash(character)){
+			if(!detectForwardSlash(character)){//Calls only the necessary inherited functions
                 controller.setNextState(controller.getOpenState(character));
                 return true;
             }
