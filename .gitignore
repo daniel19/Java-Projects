@@ -7,3 +7,4 @@
 #Packages#
 *.zip
 *.tar
+*.DS_Store
