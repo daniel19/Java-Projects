@@ -1,3 +1,5 @@
+package party;
+
 import java.io.*;
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class FileIO
     *  General purpose constructor that can be used to specify a file and whether it is for reading or for writing. <br>
     *  <b>Preconditions</b>:  The file desired (not null) and whether it is for reading or writing must be specified (only options possible).<br>
     *  <b>Postconditions</b>: The specified file is prepared for the desired operation.<br>
-    *  <b>Throws</b>: FileIOException if neither reading nor writing is specified or a problem occurs in preparing the file connections.<br>
+    *  <b>Throws</b>: party.FileIOException if neither reading nor writing is specified or a problem occurs in preparing the file connections.<br>
     */
    public FileIO(String fileName, int operation) throws FileIOException
    {
@@ -76,7 +78,7 @@ public class FileIO
     *  Constructor used to read in tokens from a file. <br>
     *  <b>Preconditions</b>:  The file desired (not null) and the delimited desired for extracting tokens must be specified.<br>
     *  <b>Postconditions</b>: The specified file is prepared for reading and token extraction.<br>
-    *  <b>Throws</b>: FileIOException if a problem occurs in preparing the file connections.<br>
+    *  <b>Throws</b>: party.FileIOException if a problem occurs in preparing the file connections.<br>
     */
    public FileIO(String fileName, String delimiter) throws FileIOException
    {
@@ -101,7 +103,7 @@ public class FileIO
     *  Returns the tokens from a single line of text read from a file. <br>
     *  <b>Preconditions</b>: The file must have been opened for reading tokens.<br>
     *  <b>Postconditions</b>: Returns the tokens from a single line of text in the file in an Iterator.<br>
-    *  <b>Throws</b>: FileIOException if the file was not opened for reading or if a problem occurs when reading or if the end of the file has been reached.<br>
+    *  <b>Throws</b>: party.FileIOException if the file was not opened for reading or if a problem occurs when reading or if the end of the file has been reached.<br>
     */
    public Iterator<String> getTokens() throws FileIOException
    {
@@ -143,7 +145,7 @@ public class FileIO
     *  Reads in a line of text from a file. <br>
     *  <b>Preconditions</b>: The file must have been opened for reading.<br>
     *  <b>Postconditions</b>: Returns a string with the next line of text from the file or null if the end of the file has been reached.<br>
-    *  <b>Throws</b>: FileIOException if the file was not opened for reading or if a problem occurs when reading from the file.<br>
+    *  <b>Throws</b>: party.FileIOException if the file was not opened for reading or if a problem occurs when reading from the file.<br>
     */
    public String readLine() throws FileIOException
    {
@@ -176,7 +178,7 @@ public class FileIO
     *  Writes a line of text to a file. <br>
     *  <b>Preconditions</b>: The file must have been opened for writing, and the line of text to be written supplied (not null).<br>
     *  <b>Postconditions</b>: The line of text is written to the file.<br>
-    *  <b>Throws</b>: FileIOException if the file was not opened for writing or a problem occurs during writing to the file.<br>
+    *  <b>Throws</b>: party.FileIOException if the file was not opened for writing or a problem occurs during writing to the file.<br>
     */
    public void writeLine(String line) throws FileIOException
    {
@@ -196,7 +198,7 @@ public class FileIO
     *  Closes the connection to a file. <br>
     *  <b>Preconditions</b>:  None.<br>
     *  <b>Postconditions</b>: The connection to the file is closed.<br>
-    *  <b>Throws</b>: FileIOException if a problem occurs when closing the file.<br>
+    *  <b>Throws</b>: party.FileIOException if a problem occurs when closing the file.<br>
     */
    public void close() throws FileIOException
    {

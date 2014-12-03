@@ -1,5 +1,5 @@
-/**
- * This program allows the user to interact with a PartyPlanner via various commands.
+package party; /**
+ * This program allows the user to interact with a party.PartyPlanner via various commands.
  * 
  * @author Martha Kosa
  * @version 10.01.2014
@@ -27,11 +27,11 @@ public class PartyPlannerDriver
         }
         catch (PartyPlannerException e)
         {
-            System.out.println("Problem creating PartyPlanner - exiting program");
+            System.out.println("Problem creating party.PartyPlanner - exiting program");
             return;
         }
         DecimalFormat fmt = new DecimalFormat("$#,##0.00");
-        System.out.println("Welcome to PartyPlannerDriver beta version!!!");
+        System.out.println("Welcome to party.PartyPlannerDriver beta version!!!");
         String choice = menu();
         while (!choice.equalsIgnoreCase("Q"))
         {           
@@ -102,7 +102,7 @@ public class PartyPlannerDriver
             }
             choice = menu();
         }
-        System.out.println("Thanks for using PartyPlannerDriver beta version!!!");
+        System.out.println("Thanks for using party.PartyPlannerDriver beta version!!!");
     }
     
     private static String menu()
@@ -131,17 +131,17 @@ public class PartyPlannerDriver
                 boolean success = pp.addToParties(name, host, date, loc, max, perParty, price);
                 if (success)
                 {
-                    System.out.println("Party added successfully");
+                    System.out.println("party.Party added successfully");
                 }
                 else
                 {
-                    System.out.println("Party not added");
+                    System.out.println("party.Party not added");
                 }
             }
             catch (PartyPlannerException ppe)
             {
                 System.out.println(ppe.getMessage());
-                System.out.println("Party not added");
+                System.out.println("party.Party not added");
             }
             choice = Keyboard.readString("Please enter Y or y to add a party, anything else to return to the main menu: ");
         }

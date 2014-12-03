@@ -1,3 +1,5 @@
+package party;
+
 /**
  *  A class to simplify keyboard input.
  *  Builds on the Scanner class provided in the Java SDK.

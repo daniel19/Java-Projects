@@ -1,5 +1,5 @@
-/**
- * Write a description of class PartyPlanner here.
+package party; /**
+ * Write a description of class party.PartyPlanner here.
  * 
  * @author Martha Kosa 
  * @version 10/01/2014
@@ -58,7 +58,7 @@ public class PartyPlanner implements Serializable, Statable
                ObjectInputStream ois = new ObjectInputStream(fis);
                plannerName = (String) ois.readObject();
                parties = (HashMap<String, Party>) ois.readObject();
-               infoText.append("PartyPlanner successfully read from object file " + fileName);
+               infoText.append("party.PartyPlanner successfully read from object file " + fileName);
            }
            else
            {
@@ -333,7 +333,7 @@ public class PartyPlanner implements Serializable, Statable
    
    public String toString()
    {
-       String result = "Party Planner: " + plannerName + "\r\nwith the following:\r\n";
+       String result = "party.Party Planner: " + plannerName + "\r\nwith the following:\r\n";
        Collection<Party> allParties = parties.values();
        for (Party party: allParties)
        {
@@ -349,7 +349,7 @@ public class PartyPlanner implements Serializable, Statable
    
    public String pay(String name, String date, int numMonths)
    {
-       String result = "Unknown Party: " + name + " on " + date;
+       String result = "Unknown party.Party: " + name + " on " + date;
        Party party = findParty(name, date);
        if (party != null)
        {
@@ -390,7 +390,7 @@ public class PartyPlanner implements Serializable, Statable
    
    public String getWhosInvited(String name, String date)
    {
-       String result = "Party unknown";
+       String result = "party.Party unknown";
        Party party = findParty(name, date);
        if (party != null)
        {

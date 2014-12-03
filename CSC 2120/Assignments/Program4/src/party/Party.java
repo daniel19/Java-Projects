@@ -1,5 +1,5 @@
-/**
- * This class represents a Party and its important features.
+package party; /**
+ * This class represents a party.Party and its important features.
  * 
  * @author Martha Kosa
  * @version Oct. 2, 2014
@@ -155,7 +155,7 @@ public class Party implements Serializable, Statable
     
     public String toString()
     {
-        return "Party: " + name + "\nHost : " + host + "\nDate: " + date +
+        return "party.Party: " + name + "\nHost : " + host + "\nDate: " + date +
         "\nLocation: " + location + "\nMax Guests: " + maxGuests + "\nAttending: " + whosAttending + "\nNot Attending: " +
         whosNotAttending + "\nUnsure: " + getWhosUnknown() + "\nPrice " + 
         FMT.format(price) + (isPerParty ? "" : " per person") + "\nCost " +
@@ -190,7 +190,7 @@ public class Party implements Serializable, Statable
         }
         if (isPaidFor)
         {
-            result = "Party " + name + " on " + date + " has already been paid for.";
+            result = "party.Party " + name + " on " + date + " has already been paid for.";
         }
         else
         {

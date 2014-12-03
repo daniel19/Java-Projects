@@ -1,3 +1,5 @@
+package party;
+
 import java.util.Comparator;
 public class Utilities {  
    

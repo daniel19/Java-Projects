@@ -1,3 +1,5 @@
+package party;
+
 import java.util.*;
 public class PartyCostComparator implements Comparator<Party> {
     public int compare(Party p1, Party p2) {  // ascending
