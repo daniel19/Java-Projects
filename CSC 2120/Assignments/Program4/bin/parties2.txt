@@ -1,0 +1,7 @@
+DEFAULT
+Fourth of July,Tina Lucci,07/04/08,null,40,400.0,true,false,0,0,0,
+April Fools,Rose Kennedy,04/01/08,null,8,1999.99,true,false,0,0,0,
+Wedding,Sam Snead,02/12/08,null,100,50.0,false,false,0,0,0,
+Graduation,Joe Smith,05/12/08,null,20,300.0,true,false,0,0,0,
+Super Bowl,Ann Jones,02/03/08,null,10,20.0,false,false,0,0,0,
+
