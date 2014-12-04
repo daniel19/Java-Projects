@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="882e4b23-b699-4dc2-a7c4-5f1e7f03e3dc" name="Default" comment="Build Pizza">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DecoratedPizza.java" afterPath="$PROJECT_DIR$/src/DecoratedPizza.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PizzaGUI.java" afterPath="$PROJECT_DIR$/src/PizzaGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ToppingList.java" afterPath="$PROJECT_DIR$/src/ToppingList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Assignments/Program4/.idea/misc.xml" afterPath="$PROJECT_DIR$/../../Assignments/Program4/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Assignments/Program4/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../Assignments/Program4/.idea/workspace.xml" />
+    <list default="true" id="882e4b23-b699-4dc2-a7c4-5f1e7f03e3dc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Lab14.iws" />
@@ -372,6 +366,11 @@
       <created>1417707073433</created>
       <updated>1417707073433</updated>
     </task>
+    <task id="LOCAL-00001" summary="Build Pizza">
+      <created>1417711072356</created>
+      <updated>1417711072356</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
