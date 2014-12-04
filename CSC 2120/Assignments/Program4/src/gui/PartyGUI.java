@@ -22,16 +22,21 @@ public class PartyGUI extends JFrame{
                    lblSortField, lblSortAlgorithm;
     private JTextField txtGuest, txtParty, txtDate, txtHost, txtLocation, txtMax, txtPrice,
             txtSortField, txtSortAlgorithm;
+    private JCheckBox perPartyBox, allPartiesBox, writeBox, objectFileBox;
 
     public PartyGUI(){
         super("Party Gui");
-        this.setLayout(new FlowLayout());
+        this.setLayout(new GridLayout(2,2));
         infoArea = new JTextArea();
         scrollPane = new JScrollPane(infoArea);
         this.add(scrollPane);
         initButtonPanel();
         this.add(panelButtons);
-        this.setSize(400, 480);
+        initTextFieldPanel();
+        this.add(panelText,1);
+        initBoxPanel();
+        this.add(panelBoxes);
+        this.setSize(800, 680);
             this.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
@@ -57,6 +62,7 @@ public class PartyGUI extends JFrame{
         buttonGuests = new JButton("Guests");
         buttonFile = new JButton("File");
         panelButtons.add(buttonAccept);
+        panelButtons.add(buttonRegret);
         panelButtons.add(buttonADD);
         panelButtons.add(buttonFile);
         panelButtons.add(buttonGuests);
@@ -65,9 +71,55 @@ public class PartyGUI extends JFrame{
         panelButtons.add(buttonPay);
         panelButtons.add(buttonADD);
         panelButtons.add(buttonPrices);
-        panelButtons.add(buttonRegret);
         panelButtons.add(buttonSort);
         panelButtons.add(buttonStatus);
         panelButtons.add(buttonWho);
+    }
+    private void initTextFieldPanel(){
+        panelText = new JPanel(new GridLayout(9,2));
+        lblDate = new JLabel("Date");
+        txtDate = new JTextField();
+        panelText.add(lblDate);
+        panelText.add(txtDate);
+        lblGuest = new JLabel("Guests");
+        txtGuest = new JTextField();
+        panelText.add(lblGuest);
+        panelText.add(txtGuest);
+        lblHost = new JLabel("Host");
+        txtHost = new JTextField();
+        panelText.add(lblHost);
+        panelText.add(txtHost);
+        lblLocation = new JLabel("Location");
+        txtLocation = new JTextField();
+        panelText.add(lblLocation);
+        panelText.add(txtLocation);
+        lblMax = new JLabel("Max Guests");
+        txtMax = new JTextField();
+        panelText.add(lblMax);
+        panelText.add(txtMax);
+        lblParty = new JLabel("Party Name");
+        txtParty = new JTextField();
+        panelText.add(lblParty);
+        panelText.add(txtParty);
+        lblPrice = new JLabel("Price");
+        txtPrice = new JTextField();
+        panelText.add(lblPrice);
+        panelText.add(txtPrice);
+        lblSortAlgorithm = new JLabel("Sorting Algorithm");
+        txtSortAlgorithm = new JTextField();
+        panelText.add(lblSortAlgorithm);
+        panelText.add(txtSortAlgorithm);
+        lblSortField = new JLabel("Sort Field");
+        txtSortField = new JTextField();
+        panelText.add(lblSortField);
+        panelText.add(txtSortField);
+    }
+    private void initBoxPanel(){
+        panelBoxes = new JPanel(new FlowLayout());
+        perPartyBox = new JCheckBox("Per Party");
+        allPartiesBox = new JCheckBox("All Parties");
+        writeBox = new JCheckBox("Write to File.");
+        objectFileBox = new JCheckBox("Use object file");
+
     }
 }
