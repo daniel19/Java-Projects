@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.dnd.*;
 
-public class PizzaGUI extends CenterFrame implements ActionListener
+public class PizzaGUI extends CenterFrame implements ActionListener, ToppingSelected, Drawable
 {
 
    public static void main (String[] args)
@@ -34,11 +34,15 @@ public class PizzaGUI extends CenterFrame implements ActionListener
    private JCheckBox onions;
    private JCheckBox sausage;
 
+    private ToppingList listToppings;
+    private DecoratedPizza pizza;
+
    public PizzaGUI(int width, int height)
    {  
       super (width, height, "Pizza Time!");
       pizzaPanel = new DrawPanel();
       pizzaPanel.setBackground(Color.white);
+      pizzaPanel.setDrawable(this);
 
       setResizable(false);
       setUp(width, height);
@@ -65,6 +69,11 @@ public class PizzaGUI extends CenterFrame implements ActionListener
       size.add(small);
       size.add(medium);
       size.add(large);
+
+
+       small.addActionListener(this);
+       medium.addActionListener(this);
+       large.addActionListener(this);
 
       thin = new JRadioButton("Thin", true);
       thin.setBackground(Color.white);
@@ -113,13 +122,14 @@ public class PizzaGUI extends CenterFrame implements ActionListener
       bag.fillCellAlignWithinCell(1,3,GridBagConstraints.WEST,pizzaToppings);
 
       //this next code will be commented out and replaced with a JList, lstToppings
-      bag.fillCellAlignWithinCell(2,3,GridBagConstraints.WEST,pepperoni);
+      /*bag.fillCellAlignWithinCell(2,3,GridBagConstraints.WEST,pepperoni);
       bag.fillCellAlignWithinCell(3,3,GridBagConstraints.WEST,onions);
       bag.fillCellAlignWithinCell(4,3,GridBagConstraints.WEST,peppers);
       bag.fillCellAlignWithinCell(5,3,GridBagConstraints.WEST,sausage);
       bag.fillCellAlignWithinCell(6,3,GridBagConstraints.WEST,mushrooms);
-
-      //bag.fillCellWithRowColSpan(2, 3, 5, 1, GridBagConstraints.BOTH, lstToppings);
+*/
+      listToppings = new ToppingList(this);
+      bag.fillCellWithRowColSpan(2, 3, 5, 1, GridBagConstraints.BOTH, listToppings);
 
       bag.fillCellCenterWithinCell(6, 2, btn);
       btn.addActionListener(this);  //a JFrame can listen for events on itself
@@ -127,9 +137,9 @@ public class PizzaGUI extends CenterFrame implements ActionListener
    
       //DO THIS
       //add some drag and drop setup statements here
-
-
-
+      DragSource ds = DragSource.getDefaultDragSource();
+      ds.createDefaultDragGestureRecognizer(listToppings, DnDConstants.ACTION_COPY, listToppings);
+      DropTarget dt = new DropTarget(pizzaPanel, listToppings);
 
 
 
@@ -141,15 +151,11 @@ public class PizzaGUI extends CenterFrame implements ActionListener
    public DecoratedPizza buildPizza()
    {
       //call methods to build the pizza
-
-
-
-
-
-
-
-
-
+      System.out.println("Entering buildPizza**********");
+      pizza = new Pizza();
+      setSize((Pizza) pizza);
+      setCrust((Pizza) pizza);
+      pizza = setToppings((Pizza) pizza);
 
       repaint();  //paints the DrawPanel, which calls draw here in the GUI, which draws the newly configured pizza
       return pizza;
@@ -169,6 +175,7 @@ public class PizzaGUI extends CenterFrame implements ActionListener
       {
          pizza.setCrust("pan");
       }
+       repaint();
    }
 
    public void setSize(Pizza pizza)
@@ -185,6 +192,7 @@ public class PizzaGUI extends CenterFrame implements ActionListener
       {
          pizza.setSize('L');
       }
+       repaint();
    }
 
    public DecoratedPizza setToppings(DecoratedPizza pizza)
@@ -214,7 +222,7 @@ public class PizzaGUI extends CenterFrame implements ActionListener
       {
          pizza = new Mushrooms(pizza);
       }
-
+      repaint();
       return pizza;
    }
 
@@ -229,12 +237,44 @@ public class PizzaGUI extends CenterFrame implements ActionListener
          SimpleDialogs.normalOutput(temp, "Pizza Order");
 
          //reset some stuff
-
-
+         resetToppings();
+         listToppings.reset();
 
       }
 
       //called after each interaction with the GUI to make sure the latest pizza is displayed
       pizza = buildPizza();
    }
+
+
+    public void resetToppings(){
+        pepperoni.setSelected(false);
+        onions.setSelected(false);
+        peppers.setSelected(false);
+        sausage.setSelected(false);
+        mushrooms.setSelected(false);
+    }
+    @Override
+    public void draw(Graphics g, int width, int height) {
+        System.out.println(pizza.getImage());
+        pizza.draw(g, width, height);
+    }
+
+    @Override
+    public void toppingSelected(String topping) {
+        System.out.println("topping selected: " + topping);
+        if(topping.equals("pepperoni"))
+            pepperoni.setSelected(true);
+        else if(topping.equals("mushrooms"))
+            mushrooms.setSelected(true);
+        else if(topping.equals("sausage"))
+            sausage.setSelected(true);
+        else if(topping.equals("onions"))
+            onions.setSelected(true);
+        else if(topping.equals("green peppers"))
+            peppers.setSelected(true);
+
+        setToppings(pizza);
+        pizza = buildPizza();
+    }
 }

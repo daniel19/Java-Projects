@@ -91,11 +91,16 @@ public class ToppingList extends JList implements DragGestureListener, DropTarge
       dtde.dropComplete(true);
 
       //DO THIS remove the topping, inform the GUI
-       
+      removeTopping(addTopping);
 
 
    }
 
+    public void removeTopping(String topping){
+        toppings.remove(topping);
+        tsl.toppingSelected(topping);
+        setListData(toppings.toArray());
+    }
    public void dragEnter(DropTargetDragEvent dtde) {}
    public void dragExit(DropTargetEvent dte) {}
    public void dragOver(DropTargetDragEvent dtde) {}
