@@ -1,7 +1,6 @@
 package gui;
 
 import javax.swing.*;
-
 import party.PartyPlanner;
 import party.PartyPlannerException;
 
@@ -51,6 +50,17 @@ public class PartyGUI extends JFrame{
                 }
             });
         disableInput(this.getContentPane(), true);
+        System.out.println("First");
+    }
+    public PartyGUI(String filename, boolean isObjectFile){
+        this();
+        try{
+            p = new PartyPlanner(filename, isObjectFile);
+            disableInput(this.getContentPane(), false);
+        }catch (PartyPlannerException ex){
+            infoArea.append("File could not be opened." + ex.getMessage() + "\n\n\n");
+        }
+        System.out.println("Second");
     }
 
     private void initButtonPanel(){
@@ -140,6 +150,7 @@ public class PartyGUI extends JFrame{
         allPartiesBox = new JCheckBox("All Parties");
         writeBox = new JCheckBox("Write to File.");
         objectFileBox = new JCheckBox("Use object file");
+        objectFileBox.setName("Object");
 
         panelBoxes.add(perPartyBox);
         panelBoxes.add(allPartiesBox);
@@ -182,7 +193,7 @@ public class PartyGUI extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             //Print status of Party Planner object
-            String status = p.getState();
+            String status =p.toString();
             infoArea.append(status + "\n\n\n");
         }
     }
@@ -201,7 +212,7 @@ public class PartyGUI extends JFrame{
                 infoArea.append(guestName + " has not been invited to the " + partyName + " " + dateText + " party.");
                 infoArea.append("Party could not be found\n\n\n");
             }
-
+            clearInput(PartyGUI.this.getContentPane());
         }
     }
     private class AcceptListener implements ActionListener{
@@ -219,6 +230,8 @@ public class PartyGUI extends JFrame{
                 infoArea.append(guestName + "could not RSVP to the " + partyName + " " + dateText + " party.");
                 infoArea.append("Party could not be found\n\n\n");
             }
+
+            clearInput(PartyGUI.this.getContentPane());
         }
     }
     private class RegretListener implements ActionListener{
@@ -235,6 +248,7 @@ public class PartyGUI extends JFrame{
                 infoArea.append(guestName + "could not RSVP to the " + partyName + " " + dateText + " party.");
                 infoArea.append("Party could not be found\n\n\n");
             }
+            clearInput(PartyGUI.this.getContentPane());
         }
     }
     private class HelpListener implements ActionListener{
@@ -256,6 +270,9 @@ public class PartyGUI extends JFrame{
                infoArea.append(p.sort(sortField,sortAlg)+"\n\n\n");
             }catch (NumberFormatException ex){
                 infoArea.append("Invalid data detected\n\n\n");
+            }finally {
+                //Clear all inputs
+                clearInput(PartyGUI.this.getContentPane());
             }
         }
     }
@@ -266,7 +283,9 @@ public class PartyGUI extends JFrame{
             partyName = txtParty.getText();
             dateText = txtDate.getText();
             infoArea.append(p.getWhosInvited(partyName,dateText) + "\n\n\n");
+            clearInput(PartyGUI.this.getContentPane());
         }
+
     }
     private class PriceListener implements ActionListener{
         @Override
@@ -285,6 +304,9 @@ public class PartyGUI extends JFrame{
                 }
             }catch (NumberFormatException ex){
                 infoArea.append("Invalid Data found.\n");
+            }finally {
+                //Clear all inputs
+                clearInput(PartyGUI.this.getContentPane());
             }
         }
     }
@@ -300,6 +322,9 @@ public class PartyGUI extends JFrame{
                 infoArea.append(p.pay(partyName, dateText, months));
             }catch (NumberFormatException ex){
                 infoArea.append("Invalid data found.\n\n\n");
+            }finally {
+                //Clear all inputs
+                clearInput(PartyGUI.this.getContentPane());
             }
         }
     }
@@ -334,12 +359,14 @@ public class PartyGUI extends JFrame{
                     if(objectFile){
                       try{
                           p.writeToObjectFile(fc.getSelectedFile().getName());
+                          infoArea.append("File " + fc.getSelectedFile().getName() + " was written successfully.\n\n\n");
                       }catch (PartyPlannerException ex){
                           infoArea.append(ex.getMessage() + "\n\n\n");
                       }
                     }else{
                         try{
                             p.writeToFile(fc.getSelectedFile().getName());
+                            infoArea.append("File " + fc.getSelectedFile().getName() + " was written successfully.\n\n\n");
                         }catch (PartyPlannerException ex){
                             infoArea.append(ex.getMessage() + "\n\n\n");
                         }
@@ -348,27 +375,33 @@ public class PartyGUI extends JFrame{
             }else{
                 //open file
                 int fileValue = fc.showOpenDialog(PartyGUI.this);
-                if(objectFile){
-                    try{
-                        p = new PartyPlanner(fc.getSelectedFile().getAbsolutePath().toString(), true);
-                        infoArea.append(p.getState());
-                        disableInput(PartyGUI.this.getContentPane(), false);
-                    }catch (PartyPlannerException ex){
-                        infoArea.append(ex.getMessage() + "\n\n\n");
-                    }
-                }else{
-                    try{
-                        p = new PartyPlanner(fc.getSelectedFile().getAbsolutePath().toString(), false);
-                        infoArea.append(p.getState());
-                        disableInput(PartyGUI.this.getContentPane(), false);
-                    }catch (PartyPlannerException ex){
-                        infoArea.append(ex.getMessage() + "\n\n\n");
+                if(fileValue == fc.APPROVE_OPTION) {
+                    if (objectFile) {
+                        try {
+                            p = new PartyPlanner(fc.getSelectedFile().getAbsolutePath().toString(), true);
+                            infoArea.append(p.getState());
+                            disableInput(PartyGUI.this.getContentPane(), false);
+                        } catch (PartyPlannerException ex) {
+                            infoArea.append("Error Opening: " + ex.getMessage() + "\n\n\n");
+                        }
+                    } else {
+                        try {
+                            p = new PartyPlanner(fc.getSelectedFile().getAbsolutePath().toString(), false);
+                            infoArea.append(p.getState());
+                            disableInput(PartyGUI.this.getContentPane(), false);
+                        } catch (PartyPlannerException ex) {
+                            infoArea.append(ex.getMessage() + "\n\n\n");
+                        }
                     }
                 }
             }
         }
     }
 
+    /**
+     * Clears all text fields and deselects all checkboxes.
+     * @param container
+     */
     private void clearInput(Container container) {
         for(Component c : container.getComponents()){
             if( c instanceof  JTextField){
@@ -381,10 +414,16 @@ public class PartyGUI extends JFrame{
         }
     }
 
+    /**
+     * At beginning of program, this function is used to disable unnecessary inputs until
+     * a party file is loaded.
+     * @param container
+     * @param flag
+     */
     private void disableInput(Container container, boolean flag){
         for(Component c : container.getComponents()){
             if( !(c instanceof  JPanel)){
-                if(flag && !(c instanceof JTextArea) && !(c.getName() == "File")) {
+                if(flag && !(c instanceof JTextArea) && !(c.getName() == "File") && !(c.getName() == "Object")) {
                     c.setEnabled(false);
                 }else{
                     c.setEnabled(true);
