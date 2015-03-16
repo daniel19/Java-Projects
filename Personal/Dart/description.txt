@@ -1,0 +1,25 @@
+Utility API for Dart Container
+------------------------------
+
+
+I. Design Approach
+
+I approached the assignment by starting with the decision to make the class final and all of its methods static.
+The class just calls three simple methods so there is no need to allow the class to instantiate. 
+
+II. Method Breakdown
+
+returnMatch() - This function takes three arguments: originial string, substring to match, and substring to 
+                replace match. Using inherent String functions in the Java library to find the last index 
+                of the match substring and replace it by using the substring() and concatenation operations at 
+                the last index. 
+
+isArmstrong() - This function takes a number and converts it to a string so that it can look at the individual 
+            characters to calculate the Armstrong value.Using a for each loop the function keeps a running sum
+            of the individual digits and the calcualtion. The function then returns a boolean result from the 
+            input number and the calculated sum. 
+
+isPrime() - This function determines a number is a prime number by using the modulus operator to determine
+            divisibility. Even numbers greater than are disregarded and the function only needs to check 
+            odd numbers up to the square root of the input to determine a prime number.  
+                 
