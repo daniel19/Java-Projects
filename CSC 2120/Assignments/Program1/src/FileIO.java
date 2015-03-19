@@ -69,7 +69,6 @@ public class FileIO
       {
          throw new FileIOException("IO Error");
       }
-
    }
 
    /**
@@ -113,7 +112,7 @@ public class FileIO
          if (!EOF)
          {
             String[] toks = temp.split(delimiter);
-            list = new ArrayList<String>();
+    //        list = new ArrayList<String>();
 
             for (String str : toks)
             {

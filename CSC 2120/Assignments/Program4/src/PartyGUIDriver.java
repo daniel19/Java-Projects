@@ -7,9 +7,7 @@ public class PartyGUIDriver {
 
         }else{
             gui = new PartyGUI(args[0], Boolean.parseBoolean(args[1]));
-
         }
-
         gui.setVisible(true);
     }
 }
