@@ -40,8 +40,7 @@ public final class Utility{
      *@param number - variable to test
      * */
     public static boolean isArmstrong(int number){
-        Integer numberAsInteger = new Integer(number);
-        String numberAsString = numberAsInteger.toString();
+        String numberAsString = new Integer(number).toString(); 
         
         int sum = 0;
         for(char c : numberAsString.toCharArray()){

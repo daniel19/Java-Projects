@@ -5,6 +5,10 @@ public class Node<T extends Comparable<T>>{
     private Node<T> left;
     private Node<T> right;
 
+    /**
+     * Constructor creates new node with null
+     * childe nodes.
+     */
     Node(T item){
         left = null;
         right = null;
@@ -33,5 +37,9 @@ public class Node<T extends Comparable<T>>{
 
     public Node<T> getLeft(){
         return left;
+    }
+    
+    public String toString(){
+        return getItem().toString();
     }
 }

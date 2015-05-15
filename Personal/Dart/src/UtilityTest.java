@@ -24,7 +24,11 @@ public class UtilityTest {
         	   System.out.print(ex.getMessage());
            }
         }
-
+        
+        /*
+         * I used an incomplete Test at first by ignoring negative numbers and not 
+         * taking account of false positives.
+         */
         for(int number : primeList){
             assertEquals(true, Utility.isPrime(number));
         }
