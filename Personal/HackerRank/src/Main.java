@@ -1,11 +1,23 @@
 import structures.*;
 import java.util.Random;
+import java.util.Scanner;
+import utility.Operations;
 
 public class Main{
     public static  BinaryTree<Integer> tree;
     public static void main(String[] args){
         System.out.println("Welcome to the HackerRank Console\n");
-        createTree();
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            createTree();
+            System.out.println("Do you want to continue?");
+            String answer = scanner.next();
+            if(answer.equalsIgnoreCase("n")){
+                break;
+            }
+        }
+        scanner.close();
+        unitTests();
     }
 
    public static void createTree(){
@@ -16,5 +28,10 @@ public class Main{
             tree.insert(value, tree.getRoot());
         }        
         tree.inorderPrint(tree.getRoot());
-   } 
+   }
+
+  public static void unitTests(){
+      Operations.reverseString("New Jack City");
+      System.out.println();
+  } 
 }
