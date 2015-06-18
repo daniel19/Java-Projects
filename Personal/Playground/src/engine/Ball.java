@@ -29,14 +29,14 @@ public class Ball extends JComponent{
 
         if( y + deltaY < 0)
             deltaY = 1;
-        if( y + deltaY > gamePanel.getHeight() - DIAMETER)
+ea       if( y + deltaY > gamePanel.getHeight() - DIAMETER)
             deltaY = -1;
 
         if(isCollision()){
             deltaY = -1;
             y = gamePanel.getRacquet().getMyY() - DIAMETER;
             int currentSpeed = gamePanel.getSpeed();
-            int newSpeed = currentSpeed - new Double(currentSpeed*0.153).intValue();
+            int newSpeed = currentSpeed - new Double(Math.floor(currentSpeed*0.153)).intValue();
             System.out.println("New: " + newSpeed + " old: " + currentSpeed);
             gamePanel.setSpeed(newSpeed);
         }

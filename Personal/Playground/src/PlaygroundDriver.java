@@ -7,7 +7,6 @@ public  class PlaygroundDriver{
         GamePanel gp = new GamePanel(Color.BLUE);
         ForceGUI gui = new ForceGUI(gp);
         gui.setVisible(true);
-        
         while(true){
             gp.gameAction();
             gp.repaint();
