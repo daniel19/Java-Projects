@@ -1,44 +1,49 @@
 import structures.*;
 import java.util.Random;
-import java.util.Scanner;
-import utility.Operations;
+import utility.*;
 import problems.easy.*;
 
 public class Main{
     public static  BinaryTree<Integer> tree;
+    private static Keyboard keyboard = Keyboard.getKeyboard();
+
     public static void main(String[] args){
         System.out.println("Welcome to the HackerRank Console\n");
-        /*Scanner scanner = new Scanner(System.in);
-        while(true){
-            createTree();
-            System.out.println("Do you want to continue?");
-            String answer = scanner.next();
-            if(answer.equalsIgnoreCase("n")){
-                break;
-            }
+        boolean running = true;
+        while(running){
+            running = display();
         }
-        scanner.close();
-        unitTests();
-
-        Regex testRegex = new Regex("                        a                      ");
-        String[] tokens = testRegex.tokenizeWithRegex();
-        System.out.println(testRegex.findNumberOfTokens(tokens));
-        for(String token: tokens){
-            System.out.println(token);
-        }
-        */
-        FileIO reader = new FileIO("input01.txt", FileIO.FOR_READING); 
-        while(!reader.EOF()){
-            String input = reader.readLine();
-            if(input != null){
-                DataStructures.JavaStack stack = new DataStructures.JavaStack(input);
-                System.out.println(stack.isBalanced());
-            }
-        }
-        //DataStructures.JavaStack stack = new DataStructures.JavaStack("}}}}");
-        //System.out.println(stack.isBalanced());
     }
 
+   private static boolean display(){
+       clearScreen();
+
+       int choice = keyboard.readInt("Please select a menu option: ");
+       switch(choice){
+           case 1:
+               break;
+           case 2:
+               break;
+           case 3:
+               break;
+           case 4:
+               break;
+           default:
+               break;
+       }       
+      
+       String willContinue = keyboard.readString("Do you want to continue?(y/n) ");
+       if(willContinue.equalsIgnoreCase("y") || willContinue.equalsIgnoreCase("yes"))
+           return true;
+       
+       return false;
+   }
+
+   private static void clearScreen(){
+       for(int i =0; i < 25; i++){
+           System.out.println();
+       }
+   }
    public static void createTree(){
         tree = new BinaryTree<Integer>();
         Random rand = new Random();

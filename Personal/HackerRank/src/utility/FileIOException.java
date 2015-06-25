@@ -1,3 +1,5 @@
+package utility;
+
 @SuppressWarnings("serial")
 public class FileIOException extends RuntimeException
 {

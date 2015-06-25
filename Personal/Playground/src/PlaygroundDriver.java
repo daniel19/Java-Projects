@@ -1,9 +1,29 @@
 import gui.*;
+
 import java.awt.Color;
+
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public  class PlaygroundDriver{
     public static void main(String[] args){
         System.out.println("Starting Simulation");
+        playNim();
+    }   
+
+    static void playNim(){
+        try{
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex){
+        }
+
+        NimPanel panel = new NimPanel();
+        NimGUI gui = new NimGUI(panel);
+        gui.setResizable(false);
+        gui.setVisible(true);
+    }
+   
+    static void playPong(){
         GamePanel gp = new GamePanel(Color.BLUE);
         ForceGUI gui = new ForceGUI(gp);
         gui.setVisible(true);
@@ -16,5 +36,5 @@ public  class PlaygroundDriver{
                 System.out.println(e.getMessage());
             }
         }
-    }    
+   } 
 }
