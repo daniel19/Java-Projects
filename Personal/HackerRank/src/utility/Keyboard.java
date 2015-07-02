@@ -1,3 +1,5 @@
+package utility;
+
 /**
  *  A class to simplify keyboard input.
  *  Abstracts the Scanner class provided in the Java SDK.
