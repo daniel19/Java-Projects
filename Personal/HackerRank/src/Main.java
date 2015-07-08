@@ -26,7 +26,6 @@ public class Main{
     }
 
    private static boolean display(){
-//       clearScreen();
        printMenu();
        int choice = keyboard.readInt("Please select a menu option: ");
        switch(choice){
@@ -53,13 +52,14 @@ public class Main{
    }
    
    private static void sherlock(){
-        String filename = keyboard.readString("Enter filename that contains data for the Sherlock problem: ");
+        String filename = keyboard.readString("\nEnter filename that contains data for the Sherlock problem: ");
         try{
             FileIO file = new FileIO(filename, FileIO.FOR_READING);
             int tests = Integer.parseInt(file.readLine());
             List<int[]> arrays = new ArrayList<>();
             for(int i = 0; i < 2*tests; i++){
-               if(i % 2 != 0){
+               if(i % 2 == 0){
+                  System.out.println(i);
                   String[] elements = file.readLine().split(" ");
                   int[] test = Arrays.asList(elements).stream().mapToInt(Integer::parseInt).toArray(); 
                   arrays.add(test);
@@ -101,7 +101,7 @@ public class Main{
    }
    
    private static void printMenu(){
-       System.out.println("1) 100-The 3n+1 problem\n2)");
+       System.out.println("1) 100-The 3n+1 problem\n2)TEST FUNC\n3)Sherlock");
    }
 
 
