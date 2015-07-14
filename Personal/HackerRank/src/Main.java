@@ -1,9 +1,11 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import problems.easy.Kelly;
+import problems.easy.Warmups;
 import problems.easy.algorithms.Sherlock;
 
 import structures.BinaryTree;
@@ -31,17 +33,10 @@ public class Main{
        switch(choice){
            case 1:
                one();
-               break;
-           case 2:
-               problem(22);
-               break;
-           case 3:
-               sherlock();
-               break;
-           case 4:
-               break;
-           default:
-               break;
+               break; case 2: problem(22); break; case 3: sherlock(); break; case 4: bigSum(); break; case 5: squareMatrix(); break;
+           case 6:
+               plusMinus();
+               break; case 7: bigFact(); break; default: break;
        }       
       
        String willContinue = keyboard.readString("Do you want to continue?(y/n) ");
@@ -51,6 +46,58 @@ public class Main{
        return false;
    }
    
+   private static void bigFact(){
+    int input = keyboard.readInt("Please enter an integer: ");
+    System.out.print("The result is: ");
+    Warmups.bigFact(BigInteger.valueOf(input));
+   }
+
+   private static void plusMinus(){
+       String filename = keyboard.readString("Please enter in filename for plusMinus: ");
+        try{
+           FileIO file = new FileIO(filename, FileIO.FOR_READING);
+           int arrayLength = Integer.parseInt(file.readLine());
+           int[] array = Arrays.asList(file.readLine().split(" ")).stream().mapToInt(Integer::parseInt).toArray();
+           Arrays.stream(array).forEach(System.out::println);
+           Warmups.plusMinus(array);
+        }catch(FileIOException ex){
+            System.out.println(ex.getMessage());
+        }
+   }
+   private static void squareMatrix(){
+       String filename = keyboard.readString("Please enter in filename for squareMatrix: ");
+       try{
+           FileIO file = new FileIO(filename, FileIO.FOR_READING);
+           int arrayLength = Integer.parseInt(file.readLine());
+           //long[] numbers = Arrays.asList(file.readLine().split(" ")).stream().mapToLong(Long::parseLong).toArray(); 
+           int[][] matrix = new int[arrayLength][arrayLength];
+           for(int i=0; i< arrayLength; i++){
+              String[] elements = file.readLine().split(" ");
+               for(int j=0; j < arrayLength; j++){
+                 matrix[i][j] = Integer.parseInt(elements[j]);
+               }
+           }
+           Warmups.diagonalDiff(matrix);
+       }catch(FileIOException ex){
+           System.out.println(ex.getMessage());
+       }     
+   }
+
+   private static void bigSum(){
+       String filename = keyboard.readString("Please enter in filename for big SUM: ");
+       try{
+           FileIO file = new FileIO(filename, FileIO.FOR_READING);
+           int arrayLength = Integer.parseInt(file.readLine());
+           long[] numbers = Arrays.asList(file.readLine().split(" ")).stream().mapToLong(Long::parseLong).toArray(); 
+           System.out.println("There are " + arrayLength + " numbers to be added");
+            
+           Warmups.bigSum(numbers);
+
+       }catch(FileIOException ex){
+           System.out.println(ex.getMessage());
+       }
+
+
    private static void sherlock(){
         String filename = keyboard.readString("\nEnter filename that contains data for the Sherlock problem: ");
         try{
@@ -101,7 +148,7 @@ public class Main{
    }
    
    private static void printMenu(){
-       System.out.println("1) 100-The 3n+1 problem\n2)TEST FUNC\n3)Sherlock");
+       System.out.println("1) 100-The 3n+1 problem\n2)TEST FUNC\n3)Sherlock\n4)Big Sum\n");
    }
 
 
