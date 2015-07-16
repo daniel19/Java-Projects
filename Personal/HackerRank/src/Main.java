@@ -7,6 +7,7 @@ import java.util.Random;
 import problems.easy.Kelly;
 import problems.easy.Warmups;
 import problems.easy.algorithms.Sherlock;
+import problems.hard.Implementation;
 
 import structures.BinaryTree;
 
@@ -36,7 +37,9 @@ public class Main{
                break; case 2: problem(22); break; case 3: sherlock(); break; case 4: bigSum(); break; case 5: squareMatrix(); break;
            case 6:
                plusMinus();
-               break; case 7: bigFact(); break; default: break;
+               break; case 7: bigFact(); break; 
+           case 8:
+               rotateMatrix(); break; default: break;
        }       
       
        String willContinue = keyboard.readString("Do you want to continue?(y/n) ");
@@ -46,6 +49,28 @@ public class Main{
        return false;
    }
    
+   private static void rotateMatrix(){
+       String filename = keyboard.readString("Please enter in filename for rotateMatrix: ");
+       try{
+           FileIO file = new FileIO(filename, FileIO.FOR_READING);
+           String[] args = file.readLine().split(" ");
+           int rows = Integer.parseInt(args[0]), columns = Integer.parseInt(args[1]);
+           int numberOfRotations = Integer.parseInt(args[2]);
+           //long[] numbers = Arrays.asList(file.readLine().split(" ")).stream().mapToLong(Long::parseLong).toArray(); 
+           int[][] matrix = new int[rows][columns];
+           for(int i=0; i< rows; i++){
+              String[] elements = file.readLine().split(" ");
+               for(int j=0; j < columns; j++){
+                 matrix[i][j] = Integer.parseInt(elements[j]);
+               }
+           }
+           Implementation.rotation(matrix, numberOfRotations, Implementation.ROTATE_LEFT);
+       }catch(FileIOException ex){
+           System.out.println(ex.getMessage());
+       }     
+
+   }
+
    private static void bigFact(){
     int input = keyboard.readInt("Please enter an integer: ");
     System.out.print("The result is: ");
