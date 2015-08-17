@@ -1,5 +1,8 @@
 package problems.hard;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *Static class to run HackerRank Challenges from the Algorithm Domain.
  */
@@ -34,25 +37,21 @@ public class Implementation{
         int rows = matrix.length;
         int columns = matrix[0].length;
         int[][] result = new int[rows][columns];
-        for(int i=0; i < rows; i++){
-            for(int j=0; j < columns; j++){
-                if(direction == 0){
-                    result[i][j] = matrix[j][columns- i -1];
-                    //moveLeft(rows, columns, i, j);
-                }else{
-                    result[i][j] = matrix[rows - j -1][i];
-                    //moveRight(rows,columns, i, j);
-                }
-            }
+        int numberOfLayers = Math.min(rows, columns)/2;
+        
+        for(int i=0; i < numberOfLayers; i++){
+            //add layer elements to their own array;
+            List<Integer> layer = new ArrayList<>();
+
+            //Top Layer
+            //Bottom Layer
+            //Left Layer
+            //Right Layer
         }
+
         print2DMatrix(result);
     }
 
-    private static void moveLeft(int rows, int columns, int x, int y){
-    }
-   
-   
-    private static void moveRight(int rows, int columns, int x, int y){}
     
     private static void print2DMatrix(int[][] matrix){
         int row = matrix.length;
