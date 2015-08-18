@@ -1,0 +1,10 @@
+*.class
+
+*.jar
+*.war
+*.ear
+
+workbench.xmi
+*.swp
+*.swo
+bin/

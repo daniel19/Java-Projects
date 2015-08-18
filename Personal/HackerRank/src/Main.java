@@ -51,16 +51,21 @@ public class Main{
     }
     
     private static void dailys(){
-        List<RedditDaily.Fortune> fortunes = new ArrayList<>();
-        fortunes.add(new RedditDaily.Fortune("synchronized", "snond"));    
-        fortunes.add(new RedditDaily.Fortune("misfunctioned", "snond"));    
-        fortunes.add(new RedditDaily.Fortune("mispronounced", "snond"));    
-        fortunes.add(new RedditDaily.Fortune("shoutgunned", "snond")); 
-        fortunes.add(new RedditDaily.Fortune("snond", "snond"));
-        
-        for(RedditDaily.Fortune f : fortunes){
-           System.out.println(f.analyze());
-        } 
+        FileIO file = new FileIO("files/enable1.txt", FileIO.FOR_READING);
+        int count = 0;
+        while(!file.EOF()){
+            String word = file.readLine();
+            if(word == null)
+                break;
+            String[] words = {"snond", "rrizi", "eaing"};
+            for(String w : words){
+                RedditDaily.Fortune f = new RedditDaily.Fortune(word, w);
+                if(f.analyze() && w.equals(words[0])){
+                    count++;
+                }
+            }
+        }
+        System.out.println("Count: " + count);
     }
 
     private static void rotateMatrix(){
