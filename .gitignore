@@ -7,4 +7,7 @@
 workbench.xmi
 *.swp
 *.swo
+
+.settings/
 bin/
+.idea/
