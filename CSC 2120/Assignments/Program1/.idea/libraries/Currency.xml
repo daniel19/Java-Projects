@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Currency">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/Currency.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
