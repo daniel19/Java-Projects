@@ -1,14 +1,16 @@
 package problems.easy.algorithms;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 
 public class EvenTree{
     private int vertices, edges;
-    List<List<Integer>> adjacency = new ArrayList<>();
+    private List<List<Integer>> adjacency = new ArrayList<>();
+    private List<Integer> vistedNodes = new ArrayList<>();
+    private Map<Integer, Integer> subtreeMap = new HashMap<>();
 
     public EvenTree(int vertices, int edges, List<String> edgeList){
         this.vertices = vertices;
@@ -16,45 +18,50 @@ public class EvenTree{
         populate(edgeList);
     }
 
-    private void populate(List<String> edges){
-        int randomRoot = new Random().nextInt(edges.size());
+    private void populate(List<String> edgeList){
+        for(int j = 0; j < vertices; j++){
+            adjacency.add(new ArrayList<Integer>());
+        }
 
-        String[] nodes= edges.get(randomRoot).split(" ");
-        assert(nodes.length == 2);
-        int root = Integer.parseInt(nodes[1]), child = Integer.parseInt(nodes[0]);
-        List<Integer> list = new ArrayList<>();
-        list.add(root);
-        list.add(child);
+        for(int i =0; i < edges; i++){
+            String[] nodes = edgeList.get(i).split(" ");
+            List<Integer> listOne = adjacency.get(Integer.parseInt(nodes[0])-1);
+            List<Integer> listTwo = adjacency.get(Integer.parseInt(nodes[1])-1);
+            listOne.add(Integer.parseInt(nodes[1]));
+            listTwo.add(Integer.parseInt(nodes[0]));
+        }
+    }
 
-        adjacency.add(list);
+    private void dfs(int node){
+        vistedNodes.add(node);
+        subtreeMap.putIfAbsent(node, 1);
 
-        for(int i =0; i < this.edges; i++){
-            if(i != randomRoot){
-                nodes = edges.get(i).split(" ");
-                assert(nodes.length == 2);
-                list.clear();
-                root = Integer.parseInt(nodes[1]);
-                child = Integer.parseInt(nodes[0]);
-                Iterator<List<Integer>> it = adjacency.iterator();
-                while(it.hasNext()){
-                    List<Integer> adjList = it.next();
-                    if(adjList.size() > 0 && adjList.get(0) == root){
-                        adjList.add(child);
-                    }else{
-                        list.add(root);
-                        list.add(child);
-                        adjacency.add(list);
-                    }
-                }
+        List<Integer> traversingList = adjacency.get(node);
+        for(int i=0; i < traversingList.size(); i++){
+            int vertex = traversingList.get(i) - 1;
+            if(!vistedNodes.contains(vertex)){
+               dfs(vertex);
+               int value = subtreeMap.get(vertex) + subtreeMap.get(node);
+               subtreeMap.replace(node, value);
             }
         }
-        System.out.println(adjacency);
+
     }
 
     public int decompose(){
-        if(!(vertices/2 == 0)){
+
+        if(!(vertices%2 == 0)){
            return 0;
         }
-        return 0;
+        dfs(0);
+        System.out.println(subtreeMap);
+        int sum = 0;
+        for(Map.Entry<Integer, Integer> entry : subtreeMap.entrySet()){
+            if(entry.getValue() % 2 == 0 && entry.getValue() != vertices){
+                sum++;
+            }
+        }
+
+        return sum;
     }
 }

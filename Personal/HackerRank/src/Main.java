@@ -68,7 +68,7 @@ public class Main{
             }
         }
         EvenTree tree = new EvenTree(n, m, listOfEdges);
-        tree.decompose();
+        System.out.println(tree.decompose());
     }
 
     private static void dailys(){
