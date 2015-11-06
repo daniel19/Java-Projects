@@ -29,7 +29,7 @@ public class Ball extends JComponent{
 
         if( y + deltaY < 0)
             deltaY = 1;
-ea       if( y + deltaY > gamePanel.getHeight() - DIAMETER)
+        if( y + deltaY > gamePanel.getHeight() - DIAMETER)
             deltaY = -1;
 
         if(isCollision()){

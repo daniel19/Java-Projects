@@ -6,10 +6,7 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class ForceGUI extends JFrame{
-    
-    //Global labesl
     private JLabel title, description;
-   
     private JPanel panel; 
   
     public ForceGUI(JPanel panel){

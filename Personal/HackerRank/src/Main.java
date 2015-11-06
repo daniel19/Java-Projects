@@ -47,6 +47,7 @@ public class Main{
         }
 
         String willContinue = keyboard.readString("Do you want to continue?(y/n) ");
+        willContinue.
         if(willContinue.equalsIgnoreCase("y") || willContinue.equalsIgnoreCase("yes"))
             return true;
 
@@ -54,21 +55,25 @@ public class Main{
     }
 
     private static void evenTree(){
-        String filename = keyboard.readString("Enter in file for EvenTree: ");
-        FileIO file = new FileIO(filename, FileIO.FOR_READING);
-        int n, m;
-        String[] firstLine = file.readLine().split(" ");
-        n = Integer.parseInt(firstLine[0]);
-        m = Integer.parseInt(firstLine[1]);
-        List<String> listOfEdges = new ArrayList<>();
-        while(!file.EOF()){
-            String line = file.readLine();
-            if(line != null && !line.isEmpty()){
-                listOfEdges.add(line);
+        try{
+            String filename = keyboard.readString("Enter in file for EvenTree: ");
+            FileIO file = new FileIO(filename, FileIO.FOR_READING);
+            int n, m;
+            String[] firstLine = file.readLine().split(" ");
+            n = Integer.parseInt(firstLine[0]);
+            m = Integer.parseInt(firstLine[1]);
+            List<String> listOfEdges = new ArrayList<>();
+            while(!file.EOF()){
+                String line = file.readLine();
+                if(line != null && !line.isEmpty()){
+                    listOfEdges.add(line);
+                }
             }
+            EvenTree tree = new EvenTree(n, m, listOfEdges);
+            System.out.println(tree.decompose());
+        }catch(FileIOException ex){
+            System.out.println(ex.getMessage());
         }
-        EvenTree tree = new EvenTree(n, m, listOfEdges);
-        System.out.println(tree.decompose());
     }
 
     private static void dailys(){

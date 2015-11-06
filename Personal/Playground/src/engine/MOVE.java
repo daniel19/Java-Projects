@@ -7,4 +7,5 @@ public enum MOVE{
     private int pos;
     MOVE(int pos){this.pos = pos;}
     public int getPosition(){return pos;}
+    public void updatePosition(int position){pos = position;}
 }

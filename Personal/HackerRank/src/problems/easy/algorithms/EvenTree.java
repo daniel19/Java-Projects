@@ -45,7 +45,6 @@ public class EvenTree{
                subtreeMap.replace(node, value);
             }
         }
-
     }
 
     public int decompose(){
@@ -61,7 +60,6 @@ public class EvenTree{
                 sum++;
             }
         }
-
         return sum;
     }
 }

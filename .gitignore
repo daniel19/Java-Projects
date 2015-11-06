@@ -11,3 +11,8 @@ workbench.xmi
 .settings/
 bin/
 .idea/
+doc/
+
+*.tar
+*.zip
+*.Ds_store
