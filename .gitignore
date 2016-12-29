@@ -1,8 +1,10 @@
+#Compiled source #
 *.class
-
 *.jar
 *.war
 *.ear
+*.exe
+*.o
 
 workbench.xmi
 *.swp
@@ -13,6 +15,7 @@ bin/
 .idea/
 doc/
 
+#Packages#
 *.tar
 *.zip
 *.Ds_store
